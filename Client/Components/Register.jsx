@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from 'formik'
 import FormikTextInput from "./FormikTextInput";
-import { View, Button } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import { registerValidationSchema } from '../Utils/ValidationSchemas/Register'
 
 export default function Register() {
@@ -31,10 +31,11 @@ export default function Register() {
                         placeholder='Confirm password'
                         secureTextEntry
                         />
-                        <Button onPress={handleSubmit} title='Sign Up' />
+                        <Button onPress={handleSubmit} title='Sign Up'/>
                     </View>
                 )
             }}
         </Formik>
     )
 }
+

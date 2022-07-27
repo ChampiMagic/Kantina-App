@@ -15,9 +15,11 @@ export default function App() {
       <Drawer.Navigator 
       screenOptions={{ 
         headerStyle: { 
-          backgroundColor: 'trasparent', 
-          elevation: 0, shadowOpacity: 0 }, 
-          headerTitle: '' 
+          elevation: 0, 
+          shadowOpacity: 0 
+        }, 
+        headerTransparent: true,
+        headerTitle: '' 
        }} 
       drawerContent={(props) => <CustomDrawer  {...props} />}>
 
