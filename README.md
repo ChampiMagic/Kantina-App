@@ -1,2 +1,3 @@
-# ReactNative-Ecommerce
-Mini Ecommerce App
+# ReactNative-Canteen-App
+ Kantina
+
