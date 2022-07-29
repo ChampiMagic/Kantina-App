@@ -4,6 +4,7 @@ import FormikTextInput from "./FormikTextInput";
 import { View, Button } from "react-native";
 import { loginValidationSchema } from "../Utils/ValidationSchemas/Login";
 
+
 export default function Login() {
 
     const initialValues = {
@@ -11,6 +12,7 @@ export default function Login() {
         password: ''
     }
 
+    console.log(count)
     return (
         <Formik validationSchema={loginValidationSchema} initialValues={initialValues} onSubmit={(values) => console.log(values)}>
             {({ handleSubmit }) => {
