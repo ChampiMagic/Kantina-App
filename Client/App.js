@@ -1,11 +1,25 @@
+//import dependencies
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import CustomDrawer from "./Components/CustomDrawer.jsx";
-import Authentication from "./Pages/Authentication.jsx";
-import Home from "./Pages/Home.jsx";
+
+//impor redux
 import { store } from "./Redux/Store.js";
 import { Provider } from "react-redux";
+
+//import components
+import CustomDrawer from "./Components/CustomDrawer.jsx";
+
+//import pages
+import Authentication from "./Pages/Authentication.jsx";
+import Home from "./Pages/Home.jsx";
+import Settings from "./Pages/Settings"
+import Shopping from "./Pages/Shopping"
+import MyQRcode from "./Pages/MyQRcode"
+import Chronogram from "./Pages/Chronogram"
+
+
+
 
 
 
@@ -33,8 +47,28 @@ export default function App() {
           />
 
           <Drawer.Screen 
-          name="Register" 
+          name="Authentication" 
           component={Authentication} 
+          />
+
+          <Drawer.Screen 
+          name="Settings" 
+          component={Settings} 
+          />
+
+          <Drawer.Screen 
+          name="Shopping" 
+          component={Shopping} 
+          />
+
+          <Drawer.Screen 
+          name="MyQRcode" 
+          component={MyQRcode} 
+          />
+
+          <Drawer.Screen 
+          name="Chronogram" 
+          component={Chronogram} 
           />
 
         </Drawer.Navigator>
