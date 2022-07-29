@@ -27,22 +27,22 @@ const Home = ({ navigation }) => {
             <View style={styles.subContainer}>
 
                 <View style={styles.iconContainer}>
-                    <AntDesign name="shoppingcart" size={75} color="black" onPress={() => navigation.navigate("Shopping")}/>
+                    <AntDesign name="shoppingcart" size={65} color="black" onPress={() => navigation.navigate("Shopping")}/>
                     <Text style={styles.text}>Comprar</Text>
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <AntDesign name="calendar" size={75} color="black" onPress={() => navigation.navigate("Chronogram")}/>
+                    <AntDesign name="calendar" size={65} color="black" onPress={() => navigation.navigate("Chronogram")}/>
                     <Text style={styles.text}>Calendario</Text>
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <AntDesign name="qrcode" size={75} color="black" onPress={() => navigation.navigate("MyQRcode")}/>
+                    <AntDesign name="qrcode" size={65} color="black" onPress={() => navigation.navigate("MyQRcode")}/>
                     <Text style={styles.text}>CODIGO QR</Text>
                 </View>
 
                 <View style={styles.iconContainer}>
-                     <AntDesign name="setting" size={75} color="black" onPress={() => navigation.navigate("Settings")}/>
+                     <AntDesign name="setting" size={65} color="black" onPress={() => navigation.navigate("Settings")}/>
                      <Text style={styles.text}>Configuracion</Text>
                 </View>
                     
@@ -61,10 +61,9 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         flexGrow: 4,
-        paddingTop: 50
     },
     subContainer: {
-        flexGrow: 8,
+        flexGrow: 6,
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignContent: 'space-between',
