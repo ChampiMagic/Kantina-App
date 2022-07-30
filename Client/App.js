@@ -24,8 +24,8 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-
 const Drawer = createDrawerNavigator();
+
 
 
 export default function App() {
@@ -76,7 +76,18 @@ export default function App() {
           options={{
             drawerIcon: ({color}) => (
               <AntDesign name="setting" size={24} color={color} />
-            )
+            ),
+            headerTransparent: false,
+            headerTitle: 'Kantina',
+            headerTitleAlign: 'center',
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#90EE90'
+            },
+            headerTitleStyle: {
+              fontSize: 25,
+              fontWeight: '500'
+            }
           }}
           />
 
