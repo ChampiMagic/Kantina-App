@@ -12,7 +12,6 @@ export default function Login() {
         password: ''
     }
 
-    console.log(count)
     return (
         <Formik validationSchema={loginValidationSchema} initialValues={initialValues} onSubmit={(values) => console.log(values)}>
             {({ handleSubmit }) => {

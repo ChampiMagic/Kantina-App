@@ -1,6 +1,9 @@
-import { View, Text, StatusBar, StyleSheet, ImageBackground, Image } from "react-native";
+import { View, Text, StatusBar, StyleSheet, ImageBackground } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons'; 
+
+//QR component
+import QRCode from "react-qr-code";
 
 
 const URI = {
@@ -21,18 +24,10 @@ const MyQRcode = ({ navigation }) => {
             backgroundColor="rgba(0, 0, 0, 0.07)"
             translucent={true}
             />
-            <View style={styles.imageContainer}>
-                <Image style={{ width: 300, height: 300 }} source={require("../assets/kantinaLogo.png")}/>
-            </View>
-            <View style={styles.subContainer}>
-
-
-                <View style={styles.iconContainer}>
-                    <AntDesign name="qrcode" size={75} color="black" />
-                    <Text style={styles.text}>CODIGO QR</Text>
-                </View>
-                
-            </View>
+           <View style={styles.QRContainer}>
+                <Text style={styles.text}>My QR Code</Text>
+                <QRCode title="My QR Code" value="CJS6868JDN3mc5643fewf" size={256}/>
+           </View>
         </ImageBackground>
     )
 }
@@ -43,25 +38,15 @@ const styles = StyleSheet.create({
     BackgroundImage: {
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'center'
     },
-    imageContainer: {
-        flexGrow: 4,
-        paddingTop: 50
-    },
-    subContainer: {
-        flexGrow: 8,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignContent: 'space-between',
-    },
-    iconContainer: {
-        alignItems: 'center',
-        width: '50%',
-        marginBottom: 80,
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: '600'
-    }
+   QRContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+   },
+   text: {
+     fontSize: 40,
+     fontWeight: '600',
+     marginBottom: 40
+   }
 })

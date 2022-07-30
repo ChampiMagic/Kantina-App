@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     BackgroundImage: {
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        paddingTop: 50
     },
     imageContainer: {
         flexGrow: 4,

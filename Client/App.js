@@ -18,6 +18,8 @@ import Shopping from "./Pages/Shopping"
 import MyQRcode from "./Pages/MyQRcode"
 import Chronogram from "./Pages/Chronogram"
 
+//import icons
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 
@@ -37,38 +39,75 @@ export default function App() {
             shadowOpacity: 0 
           }, 
           headerTransparent: true,
-          headerTitle: '' 
+          headerTitle: '',
+          drawerActiveBackgroundColor: '#79d979',
+          drawerInactiveTintColor: '#333',
+          drawerActiveTintColor: '#fff',
+          drawerLabelStyle: {
+            marginLeft: -25,
+            fontSize: 15
+          }
         }} 
         drawerContent={(props) => <CustomDrawer  {...props} />}>
           
           <Drawer.Screen 
           name="Home" 
-          component={Home} 
+          component={Home}
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="home" size={24} color={color} />
+            )
+          }}
           />
 
           <Drawer.Screen 
           name="Authentication" 
           component={Authentication} 
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="login" size={24} color={color} />
+            )
+          }}
           />
 
           <Drawer.Screen 
           name="Settings" 
           component={Settings} 
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="setting" size={24} color={color} />
+            )
+          }}
           />
 
           <Drawer.Screen 
           name="Shopping" 
           component={Shopping} 
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="shoppingcart" size={24} color={color} />
+            )
+          }}
           />
 
           <Drawer.Screen 
           name="MyQRcode" 
           component={MyQRcode} 
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="qrcode" size={24} color={color} />
+            )
+          }}
           />
 
           <Drawer.Screen 
           name="Chronogram" 
           component={Chronogram} 
+          options={{
+            drawerIcon: ({color}) => (
+              <AntDesign name="calendar" size={24} color={color} />
+            )
+          }}
           />
 
         </Drawer.Navigator>
