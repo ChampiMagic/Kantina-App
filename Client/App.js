@@ -34,12 +34,17 @@ export default function App() {
       <NavigationContainer>
         <Drawer.Navigator 
         screenOptions={{ 
-          headerStyle: { 
-            elevation: 0, 
-            shadowOpacity: 0 
-          }, 
-          headerTransparent: true,
-          headerTitle: '',
+          headerTransparent: false,
+          headerTitle: 'Kantina',
+          headerTitleAlign: 'center',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#90EE90'
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+            fontWeight: '500'
+          },
           drawerActiveBackgroundColor: '#79d979',
           drawerInactiveTintColor: '#333',
           drawerActiveTintColor: '#fff',
@@ -56,7 +61,8 @@ export default function App() {
           options={{
             drawerIcon: ({color}) => (
               <AntDesign name="home" size={24} color={color} />
-            )
+            ),
+            headerTransparent: true,
           }}
           />
 
@@ -66,7 +72,8 @@ export default function App() {
           options={{
             drawerIcon: ({color}) => (
               <AntDesign name="login" size={24} color={color} />
-            )
+            ),
+            headerTransparent: true,
           }}
           />
 
@@ -76,18 +83,7 @@ export default function App() {
           options={{
             drawerIcon: ({color}) => (
               <AntDesign name="setting" size={24} color={color} />
-            ),
-            headerTransparent: false,
-            headerTitle: 'Kantina',
-            headerTitleAlign: 'center',
-            headerTintColor: 'white',
-            headerStyle: {
-              backgroundColor: '#90EE90'
-            },
-            headerTitleStyle: {
-              fontSize: 25,
-              fontWeight: '500'
-            }
+            )
           }}
           />
 
