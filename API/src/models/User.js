@@ -9,7 +9,7 @@ const schema = new Schema({
         required: true,
         minlength: 3
     },
-    password: {
+    passwordHash: {
         type: String,
         required: true,
         minlength: 8
@@ -21,5 +21,15 @@ const schema = new Schema({
 })
 
 schema.plugin(mongooseUniqueValidator);
+
+schema.set('toJSON', {
+   transform: (document, returnedObject) => {
+
+    //we dont send the user password
+    delete returnedObject.passwordHash
+
+   }
+})
+
 
 export default model('User', schema)
