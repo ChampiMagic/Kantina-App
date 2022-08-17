@@ -7,17 +7,25 @@ const schema = new Schema({
     name: {
         type: String,
         unique: true,
-        require: true,
+        required: true,
         minlength: 3
     },
-    class: {
+    group: {
         type: String,
-        require: true,
+        required: true,
         minlength: 3
     },
     price: {
         type: Number,
-        require: true
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    inStock: {
+        type: Boolean,
+        default: true
     }
 }, {
     versionKey: false 
