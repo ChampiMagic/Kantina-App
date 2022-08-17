@@ -1,6 +1,7 @@
 //import other things
 import cors from 'cors';
 import 'dotenv/config';
+import errorHandler from './utils/errorHandlers/RouteHandler.js';
 
 //initialization of MongoDB
 import './db.js'
@@ -10,12 +11,13 @@ import express from 'express';
 const app = express();
 
 //Importing Product Model
-import Product from './models/Product.js'
+import Product from './src/models/Product.js'
 
 
 //Config of App Middlewares
 app.use(express.json())
 app.use(cors())
+app.use(errorHandler)
 
 
 app.get('/', (req, res) => {
