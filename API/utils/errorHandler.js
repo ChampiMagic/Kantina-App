@@ -2,7 +2,9 @@ import { errorCreator } from "./responseCreator.js"
 
 const errorHandler = (err, req, res, next) => {
     let error = { ...err }
-  
+
+    error.message = err.message
+
     if (err.code === 11000) {
       const message = 'Campo duplicado, ya existe un registro con ese valor'
       error = new errorCreator(message, 400)
