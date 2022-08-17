@@ -14,7 +14,7 @@ const schema = new Schema({
         required: true,
         minlength: 8
     },
-    studen: {
+    isStudent: {
         type: Boolean,
         required: true
     }
@@ -29,6 +29,8 @@ schema.set('toJSON', {
     delete returnedObject.passwordHash
 
    }
+},{
+    versionKey: false 
 })
 
 
