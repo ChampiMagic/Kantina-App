@@ -1,7 +1,8 @@
 //import other things
 import cors from 'cors';
 import 'dotenv/config';
-import errorHandler from './utils/errorHandlers/RouteHandler.js';
+import errorHandler from './utils/errorHandler.js';
+import router from './src/routes/index.js';
 
 //initialization of MongoDB
 import './db.js'
@@ -17,30 +18,14 @@ import Product from './src/models/Product.js'
 //Config of App Middlewares
 app.use(express.json())
 app.use(cors())
+
+
+
+
+
+app.use('/api', router)
+
 app.use(errorHandler)
-
-
-app.get('/', (req, res) => {
-
-    res.send("Hello World")
-})
-
-app.get('/product', async (req, res) => {
-
-    const allProducts = await Product.find({});
-
-    res.send(allProducts)
-})
-
-app.post('/product', async (req, res) => {
-
-    const body = req.body;
-
-    const newProduct = await Product.create(body)
-
-    res.status(201).send(newProduct)
-})
-
 
 
 app.listen(process.env.PORT, () => {
