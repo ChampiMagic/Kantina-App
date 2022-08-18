@@ -3,13 +3,13 @@ import { errorCreator } from "../../utils/responseCreator.js";
 
 export const getUserById = (req, res , next) => {
 
-    const { id } = req.body;
+    const { userId } = req.body;
 
-    if(!id) {
+    if(!userId) {
         const error = new errorCreator('id is necessary', 400)
         next(error)
     } else {
-        User.findById(id)
+        User.findById(userId)
         .then(user => {
             res.send(user)
         }).catch(err => {

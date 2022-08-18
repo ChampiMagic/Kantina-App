@@ -18,6 +18,8 @@ const schema = new Schema({
         type: Boolean,
         required: true
     }
+},{
+    versionKey: false 
 })
 
 schema.plugin(mongooseUniqueValidator);
@@ -29,8 +31,6 @@ schema.set('toJSON', {
     delete returnedObject.passwordHash
 
    }
-},{
-    versionKey: false 
 })
 
 

@@ -1,7 +1,7 @@
 //import other things
 import cors from 'cors';
 import 'dotenv/config';
-import errorHandler from './utils/errorHandler.js';
+import errorHandler from './src/middleware/errorHandler.js'
 import router from './src/routes/index.js';
 
 //initialization of MongoDB
