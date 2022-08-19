@@ -1,11 +1,18 @@
 import axios from 'axios'
 import { Alert } from 'react-native'
 
-const useProducts = async (group, id, name) => {
+const useProducts = async (group, id, name, groups) => {
 
    let metaData;
+   let allGroups;
 
+   
    try {
+
+      if(groups) {
+         allGroups = await axios.get(`publicProduct/groups`)
+      }
+   
       if(id) {
          metaData = await axios.get(`publicProduct/byId?id=${id}`)
       }
@@ -23,7 +30,7 @@ const useProducts = async (group, id, name) => {
       throw { data: [], message: err.message }
    }
 
-   return { data: metaData.data.response, message: metaData.data.message }
+   return { data: metaData.data.response, message: metaData.data.message, allGroups: allGroups.data.response }
 }
 
 

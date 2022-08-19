@@ -12,6 +12,7 @@ const Shopping =  () => {
 
     const [products, setProducts] = useState([])
     const [group, setGroup] = useState("")
+    const [filters, setFilters] = useState([])
 
   
 
@@ -45,8 +46,9 @@ const Shopping =  () => {
 
     useEffect(() => {
       const asyncCall = async () => {
-        const {data, message} = await useProducts(group)
+        const {data, message, allGroups} = await useProducts(group, null, null, true)
         setProducts(data)
+        setFilters(allGroups)
       }
 
       asyncCall()
@@ -69,9 +71,9 @@ const Shopping =  () => {
                     <TouchableOpacity  style={styles.customSelector(group === "")} onPress={() => changeSection("") }>
                         <Text style={styles.text}>Todos</Text>
                     </TouchableOpacity>
-                      {products?.map((product) => (
-                        <TouchableOpacity key={product._id} style={styles.customSelector(group === product.group)} onPress={() => changeSection(product.group) }>
-                          <Text style={styles.text}>{product.group}</Text>
+                      {filters?.map((g) => (
+                        <TouchableOpacity key={g} style={styles.customSelector(group === g)} onPress={() => changeSection(g) }>
+                          <Text style={styles.text}>{g}</Text>
                         </TouchableOpacity>
                       ))}
                     </ScrollView>
