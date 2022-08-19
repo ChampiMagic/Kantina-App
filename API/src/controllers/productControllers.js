@@ -5,16 +5,13 @@ import { errorCreator } from '../../utils/responseCreator.js'
 //GET
 export const getProduct =  async (req, res, next) => {
 
-    const { id, group } = req.query;
+    const { group } = req.query;
 
     let searchProduct = [];
-
 
     try {
        
         if(group)  searchProduct = await Product.find({group})
-    
-        else if(id) searchProduct = await Product.findById(id)
     
         else searchProduct = await  Product.find({})
 
@@ -24,6 +21,29 @@ export const getProduct =  async (req, res, next) => {
         next(err)
      }
 }
+
+export const getProductById = (req, res, next) => {
+    const { id } = req.query;
+
+    if(!id) next(new errorCreator('Query is invalid or incorrect', 400))
+
+    else {
+
+        Product.findById(id)
+        .then(product => {
+
+            !product 
+                ? next(new errorCreator('Product not Found', 404))
+                : res.json(product)
+
+        }).catch(err => {
+            next(err)
+        })
+    }
+    
+}
+
+
 
 export const getProductByName = async (req, res, next) => {
     const { name } = req.query;
