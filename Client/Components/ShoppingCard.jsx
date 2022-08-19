@@ -3,16 +3,16 @@ import { View, Text, Image, StyleSheet } from "react-native";
 
 
 
-const ShoppingCard = ({URI}) => {
+const ShoppingCard = ({_id, image, title, price}) => {
 
     return (
-        <View style={styles.cardContainer}>
+        <View style={styles.cardContainer} key={_id}>
             <View style={styles.imgContainer}>
-                <Image source={{ uri: URI }} resizeMode='cover' style={styles.img}/>
+                <Image source={{ uri: image }} resizeMode='cover' style={styles.img}/>
             </View>
             <View style={styles.details}>
-                <Text style={styles.price}>$ 150</Text>
-                <Text style={styles.description}>Manzana Roja x 1 unidad</Text>
+                <Text style={styles.price}>$ {price}</Text>
+                <Text style={styles.description}>{title}</Text>
             </View>
         </View>
     )

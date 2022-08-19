@@ -21,6 +21,12 @@ import Chronogram from "./Pages/Chronogram"
 //import icons
 import { AntDesign } from '@expo/vector-icons'; 
 
+//axios baseURL config
+import axios from "axios";
+import { BACKEND_URL } from "@env"
+
+
+axios.defaults.baseURL = BACKEND_URL || "http://192.168.0.103:3005/api/";
 
 
 
@@ -63,6 +69,7 @@ export default function App() {
               <AntDesign name="home" size={24} color={color} />
             ),
             headerTransparent: true,
+            headerTitle: ""
           }}
           />
 
@@ -74,6 +81,7 @@ export default function App() {
               <AntDesign name="login" size={24} color={color} />
             ),
             headerTransparent: true,
+            headerTitle: ""
           }}
           />
 

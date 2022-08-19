@@ -65,16 +65,16 @@ const Profile = () => {
                 <View style={{ borderBottomColor: '#e2e2e2', borderBottomWidth: 1 }}>
                     <Text style={styles.text}>Genero</Text>
                     <ScrollView style={styles.genresContainer}  horizontal={true}>
-                    <TouchableOpacity  style={styles.customSelector(genre === 'hombre')} onPress={() => changeGenre('hombre') } on>
-                        <Text style={styles.text}>Hombre</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.customSelector(genre === 'mujer')} onPress={() => changeGenre('mujer')}>
-                        <Text style={styles.text}>Mujer</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.customSelector(genre === 'otro')} onPress={() => changeGenre('otro')}>
-                        <Text style={styles.text}>Otro</Text>
-                    </TouchableOpacity>
-                </ScrollView>
+                        <TouchableOpacity  style={styles.customSelector(genre === 'hombre')} onPress={() => changeGenre('hombre') } on>
+                            <Text style={styles.text}>Hombre</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.customSelector(genre === 'mujer')} onPress={() => changeGenre('mujer')}>
+                            <Text style={styles.text}>Mujer</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.customSelector(genre === 'otro')} onPress={() => changeGenre('otro')}>
+                            <Text style={styles.text}>Otro</Text>
+                        </TouchableOpacity>
+                    </ScrollView>
                 </View>
 
                 <TouchableOpacity onPress={() => console.log('submit')}>
