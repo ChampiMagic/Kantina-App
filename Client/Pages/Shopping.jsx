@@ -8,19 +8,17 @@ import { useFocusEffect } from "@react-navigation/native";
 
 const Shopping =  () => {
 
-    
-
     const [products, setProducts] = useState([])
     const [group, setGroup] = useState("")
     const [filters, setFilters] = useState([])
-
-  
+    const [toSearch, setToSearch] = useState("")
 
     const handleSearch = async (name) => {
+        setToSearch(name)
+        setGroup("")
         
         try {
-
-          const { data, message } = await useProducts(null, null, name)
+          const { data, message } = await useProducts(null, null, name, false)
           setProducts(data)
 
         }catch (err) {
@@ -30,29 +28,39 @@ const Shopping =  () => {
         
     } 
 
-    const changeSection = (sectionId) => {
+    const changeSection = async (sectionId) => {
       setGroup(sectionId)
+
+      const {data, message} = await useProducts(sectionId)
+      setProducts(data)      
     }
 
     useFocusEffect(
       useCallback(() => {
-        
+        const asyncCall = async () => {
+          const {data, message, allGroups} = await useProducts(null, null, null, true)
+          setProducts(data)
+          setFilters(allGroups)
+        }
+  
+        asyncCall()
   
         return () => {
           setGroup("")
+          setToSearch("")
         }
       }, [])
     )
 
-    useEffect(() => {
+    /*useEffect(() => {
       const asyncCall = async () => {
-        const {data, message, allGroups} = await useProducts(group, null, null, true)
+        const {data, message, allGroups} = await useProducts(null, null, null, true)
         setProducts(data)
         setFilters(allGroups)
       }
 
       asyncCall()
-    }, [group])
+    }, [])*/
 
     return (
         <View style={{ flex: 1, paddingVertical: 10, backgroundColor: '#fff' }}>
@@ -65,7 +73,7 @@ const Shopping =  () => {
             <View style={styles.inputsContainer}>
                 <View style={styles.searchBar}>
                  <AntDesign name="search1" size={24} color="#d0d0d0" />
-                 <TextInput style={styles.input} placeholder='Search' onChangeText={(value) => handleSearch(value)}/>
+                 <TextInput style={styles.input} placeholder='Search' value={toSearch} onChangeText={(value) => handleSearch(value)}/>
                 </View>
                     <ScrollView style={styles.genresContainer}  horizontal={true}>
                     <TouchableOpacity  style={styles.customSelector(group === "")} onPress={() => changeSection("") }>
