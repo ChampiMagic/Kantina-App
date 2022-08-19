@@ -1,5 +1,5 @@
 import Product from "../models/Product.js";
-import { errorCreator } from '../../utils/responseCreator.js'
+import { errorCreator, ResponseCreator } from '../../utils/responseCreator.js'
 
 
 //GET
@@ -15,7 +15,7 @@ export const getProduct =  async (req, res, next) => {
     
         else searchProduct = await  Product.find({})
 
-        res.json(searchProduct)
+        res.json(new ResponseCreator(null, 200, searchProduct))
 
     } catch (err) {
         next(err)
@@ -34,7 +34,7 @@ export const getProductById = (req, res, next) => {
 
             !product 
                 ? next(new errorCreator('Product not Found', 404))
-                : res.json(product)
+                : res.json(new ResponseCreator(null, 200, product))
 
         }).catch(err => {
             next(err)
@@ -59,7 +59,7 @@ export const getProductByName = async (req, res, next) => {
         if(!searchProduct.length) next(new errorCreator('Product not Found', 404))
 
         else {
-            res.json(searchProduct)
+            res.json(new ResponseCreator(null, 200, searchProduct))
         }
     }
     
@@ -74,7 +74,7 @@ export const createProduct =  (req, res, next) => {
 
     Product.create(productData)
      .then(newProduct => {
-        res.status(201).json(newProduct)
+        res.status(201).json(new ResponseCreator("Product Created", 201, newProduct))
      }).catch(err => {
         next(err)
      })
@@ -92,7 +92,7 @@ export const updateProduct =  (req, res, next) => {
             next(error)
 
         } else {
-            res.json(updateProduct)
+            res.json(new ResponseCreator("Product Updated", 200, updateProduct))
         }
        
     }).catch(err => {
@@ -108,7 +108,7 @@ export const deleteProduct =  (req, res, next) => {
 
     Product.findByIdAndDelete(id)
     .then(() => {
-        res.status(204).send()
+        res.status(204).send(new ResponseCreator("Product Deleted", 204, null))
     }).catch(err => {
         next(err)
     })

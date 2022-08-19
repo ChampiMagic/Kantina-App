@@ -1,6 +1,6 @@
 export class ResponseCreator {
     constructor(message, statusCode, response) {
-        this.message = message
+        this.message = message? message : "Successful"
         this.statusCode = statusCode
         this.response = response
     }
