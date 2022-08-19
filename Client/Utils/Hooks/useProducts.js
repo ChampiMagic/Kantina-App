@@ -1,27 +1,29 @@
 import axios from 'axios'
 import { Alert } from 'react-native'
 
-const useProducts = async (group, id) => {
+const useProducts = async (group, id, name) => {
 
-   if(!id) id = ""
-   if(!group) group= ""
+   let metaData;
 
-    const metaData = await axios.get(`publicProduct?id=${id}&group=${group}`)
+   try {
+      if(id) {
+         metaData = await axios.get(`publicProduct/byId?id=${id}`)
+      }
+   
+      else if(name) {
+         metaData = await axios.get(`publicProduct/byName?name=${name}`)
+      }
+   
+      else {
+         if(!group) group = ""
+         metaData = await axios.get(`publicProduct?group=${group}`)
+      }
+   }catch (err) {
+      console.error(err)
+      throw { data: [], message: err.message }
+   }
 
-    return metaData.data
-    
-    /*const body = {id, group}
-
-        axios.get('http://192.168.0.103:/api/publicProduct', body)
-         .then(Products => {
-            console.log(Products)
-            return [...Products]
-         }).catch(err => {
-            console.log("error")
-            console.error(err)
-            Alert.alert("Something went wrong", "error Hook GetProducts")
-         })*/
-         
+   return { data: metaData.data.response, message: metaData.data.message }
 }
 
 

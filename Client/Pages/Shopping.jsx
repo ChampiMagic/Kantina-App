@@ -10,15 +10,23 @@ const Shopping =  () => {
 
     
 
-    const [data, setData] = useState([])
+    const [products, setProducts] = useState([])
     const [group, setGroup] = useState("")
 
   
 
-    const handleSearch = (name) => {
+    const handleSearch = async (name) => {
         
-        const findedData = shoppinData.filter(data => data.name.includes(name))
-        setData(findedData)
+        try {
+
+          const { data, message } = await useProducts(null, null, name)
+          setProducts(data)
+
+        }catch (err) {
+          setProducts(err.data)
+        }
+       
+        
     } 
 
     const changeSection = (sectionId) => {
@@ -37,8 +45,8 @@ const Shopping =  () => {
 
     useEffect(() => {
       const asyncCall = async () => {
-        const shoppingData = await useProducts(group)
-        setData(shoppingData)
+        const {data, message} = await useProducts(group)
+        setProducts(data)
       }
 
       asyncCall()
@@ -61,7 +69,7 @@ const Shopping =  () => {
                     <TouchableOpacity  style={styles.customSelector(group === "")} onPress={() => changeSection("") }>
                         <Text style={styles.text}>Todos</Text>
                     </TouchableOpacity>
-                      {data?.map((product) => (
+                      {products?.map((product) => (
                         <TouchableOpacity key={product._id} style={styles.customSelector(group === product.group)} onPress={() => changeSection(product.group) }>
                           <Text style={styles.text}>{product.group}</Text>
                         </TouchableOpacity>
@@ -70,7 +78,7 @@ const Shopping =  () => {
             </View>
             
             <FlatList 
-            data={data}
+            data={products}
             renderItem={({item}) => <ShoppingCard _id={item._id} image={item.image} title={item.name} price={item.price} />}
             numColumns={2}
             columnWrapperStyle={styles.container}
