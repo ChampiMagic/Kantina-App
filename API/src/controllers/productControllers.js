@@ -43,8 +43,6 @@ export const getProductById = (req, res, next) => {
     
 }
 
-
-
 export const getProductByName = async (req, res, next) => {
     const { name } = req.query;
 
@@ -64,6 +62,26 @@ export const getProductByName = async (req, res, next) => {
     }
     
     
+}
+
+export const getGroups = async (req, res, next) => {
+
+    const allProducts = await Product.find({});
+
+    let groups = []
+
+    allProducts.forEach(product => {
+        if(!groups.find(g => g === product.group)) {
+            groups.push(product.group)
+        }
+    })
+
+    if(!groups.length) next(new errorCreator('groups not Found', 404))
+    else {
+        res.json(new ResponseCreator(null, 200, groups))
+    }
+    
+
 }
 
 
