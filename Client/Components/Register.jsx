@@ -5,11 +5,17 @@ import { View, Button, StyleSheet, Text } from "react-native";
 import { registerValidationSchema } from '../Utils/ValidationSchemas/Register'
 import axios from 'axios';
 import Checkbox from 'expo-checkbox';
+import { useDispatch } from "react-redux";
+
+//reducer
+import { saveUser } from "../Redux/slices/userSlice";
 
 //Token Store
 import * as SecureStore from 'expo-secure-store';
 
-export default function Register() {
+export default function Register({navigation}) {
+
+    const dispatch = useDispatch()
 
     const [isChecked, setChecked] = useState(false);
 
@@ -26,7 +32,13 @@ export default function Register() {
 
         axios.post('publicAuth', values)
         .then(async (metaData) => {
-            await SecureStore.setItemAsync("token", metaData.data.response);
+
+            await SecureStore.setItemAsync("token", metaData.data.response.token);
+           
+            dispatch(saveUser(metaData.data.response.user))
+
+            navigation.navigate("Home")
+
         }).catch(err => {
             console.error(err)
         })

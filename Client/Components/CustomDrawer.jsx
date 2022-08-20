@@ -3,12 +3,16 @@ import { View, Text, Image, TouchableOpacity } from "react-native"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { AntDesign } from '@expo/vector-icons';
 
+
 //Hooks
 import useLogOut from "../Utils/Hooks/useLogOut";
-
+import { useDispatch } from "react-redux";
 
 
 const CustomDrawer = ({...props}) => {
+
+  const dispatch = useDispatch()
+
     return (
       <View style={{ flex: 1 }}>
           <DrawerContentScrollView 
@@ -32,7 +36,7 @@ const CustomDrawer = ({...props}) => {
 
          <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
 
-          <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }}  onPress={() => useLogOut()}>
+          <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }}  onPress={() => useLogOut(dispatch)}>
           <AntDesign name="logout" size={24} color="black" />
           <Text
           style={{

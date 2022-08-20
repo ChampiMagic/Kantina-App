@@ -9,8 +9,10 @@ const URI = {
 
 const Home = ({ navigation }) => {
 
-    const count = useSelector(state => state.counter.value)
+    const user = useSelector(state => state.userController.user)
     const dispatch = useDispatch()
+
+    console.log(user)
 
     return (
     

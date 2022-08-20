@@ -1,14 +1,19 @@
 //Token Store
 import * as SecureStore from 'expo-secure-store';
 
+//reducer
+import { deleteUser } from '../../Redux/slices/userSlice';
+
 import { Alert } from 'react-native';
 
-const useLogOut = async () => {
+const useLogOut = async (dispatch) => {
 
     try {
 
        await SecureStore.deleteItemAsync("token")
-       console.log("log Out correctly")
+       
+       dispatch(deleteUser())
+
     } catch (err) {
 
         Alert.alert("Error logOut", err.message)

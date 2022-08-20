@@ -4,11 +4,17 @@ import FormikTextInput from "./FormikTextInput";
 import { View, Button } from "react-native";
 import { loginValidationSchema } from "../Utils/ValidationSchemas/Login";
 import axios from 'axios';
+import { useDispatch } from "react-redux";
+
+//reducer
+import { saveUser } from "../Redux/slices/userSlice";
 
 //Token Store
 import * as SecureStore from 'expo-secure-store';
 
-export default function Login() {
+export default function Login({navigation}) {
+
+    const dispatch = useDispatch()
 
     const initialValues = {
         email: '',
@@ -19,7 +25,11 @@ export default function Login() {
        
         axios.post('publicAuth/login', values)
         .then(async (metaData) => {
-            await SecureStore.setItemAsync("token", metaData.data.response);
+            await SecureStore.setItemAsync("token", metaData.data.response.token);
+
+            dispatch(saveUser(metaData.data.response.user))
+
+            navigation.navigate("Home")
         }).catch(err => {
             console.error(err)
         })

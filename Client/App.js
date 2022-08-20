@@ -26,7 +26,7 @@ import axios from "axios";
 import { BACKEND_URL } from "@env"
 
 
-axios.defaults.baseURL = BACKEND_URL || "http://192.168.0.103:3005/api/";
+axios.defaults.baseURL = BACKEND_URL || "http://192.168.0.114:3005/api/";
 
 
 
