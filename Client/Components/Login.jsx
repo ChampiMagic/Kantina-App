@@ -5,6 +5,9 @@ import { View, Button } from "react-native";
 import { loginValidationSchema } from "../Utils/ValidationSchemas/Login";
 import axios from 'axios';
 
+//Token Store
+import * as SecureStore from 'expo-secure-store';
+
 export default function Login() {
 
     const initialValues = {
@@ -15,8 +18,8 @@ export default function Login() {
     const onSubmit = (values) => {
        
         axios.post('publicAuth/login', values)
-        .then(metaData => {
-            console.log("token", metaData.data.response)
+        .then(async (metaData) => {
+            await SecureStore.setItemAsync("token", metaData.data.response);
         }).catch(err => {
             console.error(err)
         })

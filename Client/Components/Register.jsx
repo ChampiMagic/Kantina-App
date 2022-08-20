@@ -6,6 +6,9 @@ import { registerValidationSchema } from '../Utils/ValidationSchemas/Register'
 import axios from 'axios';
 import Checkbox from 'expo-checkbox';
 
+//Token Store
+import * as SecureStore from 'expo-secure-store';
+
 export default function Register() {
 
     const [isChecked, setChecked] = useState(false);
@@ -22,12 +25,16 @@ export default function Register() {
     const onSubmit = (values) => {
 
         axios.post('publicAuth', values)
-        .then(metaData => {
-            console.log(metaData.data.response)
+        .then(async (metaData) => {
+            await SecureStore.setItemAsync("token", metaData.data.response);
         }).catch(err => {
             console.error(err)
         })
     }
+
+    async function save(key, value) {
+        
+      }
 
     return (
         <Formik validationSchema={registerValidationSchema} initialValues={initialValues} onSubmit={(values) => onSubmit(values)}>

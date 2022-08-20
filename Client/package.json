@@ -34,7 +34,8 @@
     "react-redux": "8.0.2",
     "toggle-switch-react-native": "3.3.0",
     "yup": "0.32.11",
-    "expo-checkbox": "~2.1.0"
+    "expo-checkbox": "~2.1.0",
+    "expo-secure-store": "~11.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.9"
