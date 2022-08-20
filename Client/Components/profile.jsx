@@ -7,8 +7,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { AntDesign } from '@expo/vector-icons';
 
 
-const Profile = () => {
 
+
+const Profile = ({name}) => {
+    
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [genre, setGenre] = useState('hombre');
@@ -31,7 +33,7 @@ const Profile = () => {
       }
   };
   
-
+  
     return (
         <View style={styles.container}>
             <View style={styles.imgContainer}>
@@ -40,7 +42,7 @@ const Profile = () => {
             <View style={styles.form}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.text}>Nombre</Text>
-                    <SimpleCustomTextInput name='nombre' placeholder='Nombre' style={{ width: '50%' }}/>
+                    <SimpleCustomTextInput name='nombre' placeholder="Nombre" value={name} style={{ width: '50%' }}/>
                 </View>
                 <View style={styles.inputContainer}>
                     <View style={{ width: '50%' }}>

@@ -1,5 +1,4 @@
 import { View, Text, StatusBar, StyleSheet, ImageBackground, Image } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons'; 
 
 
@@ -9,10 +8,7 @@ const URI = {
 
 const Home = ({ navigation }) => {
 
-    const user = useSelector(state => state.userController.user)
-    const dispatch = useDispatch()
-
-    console.log(user)
+    
 
     return (
     
