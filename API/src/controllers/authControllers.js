@@ -20,7 +20,7 @@ export const register = async (req, res, next) => {
         isStudent
     })
     .then(newUser => {
-
+       
         const userForToken = {
             _id: newUser._id
         }
@@ -31,14 +31,15 @@ export const register = async (req, res, next) => {
 
 
     }).catch(err => {
+        console.error(err)
         next(err)
     })
 }
 
 export const login = async (req, res, next) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ email })
 
     const passwordCorrect = user === null 
         ? false
@@ -55,5 +56,5 @@ export const login = async (req, res, next) => {
 
     const token = jwt.sign(userForToken, process.env.SECRET_WORD)
 
-    res.send({token})
+    res.send(new ResponseCreator('Login Successfully', 200, token))
 }

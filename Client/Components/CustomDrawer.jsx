@@ -3,6 +3,8 @@ import { View, Text, Image, TouchableOpacity } from "react-native"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { AntDesign } from '@expo/vector-icons';
 
+//Hooks
+import useLogOut from "../Utils/Hooks/useLogOut";
 
 
 
@@ -30,7 +32,7 @@ const CustomDrawer = ({...props}) => {
 
          <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
 
-          <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }} >
+          <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }}  onPress={() => useLogOut()}>
           <AntDesign name="logout" size={24} color="black" />
           <Text
           style={{
@@ -45,7 +47,7 @@ const CustomDrawer = ({...props}) => {
           style={{
             marginLeft: 15,
           }}
-          >Log out</Text>
+          >Share</Text>
           </TouchableOpacity>  
 
          </View>
