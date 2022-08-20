@@ -27,7 +27,7 @@ export const register = async (req, res, next) => {
     
         const token = jwt.sign(userForToken, process.env.SECRET_WORD)
     
-        res.send(new ResponseCreator('Register Successfully', 201, token))
+        res.send(new ResponseCreator('Register Successfully', 201, {token, user: newUser}))
 
 
     }).catch(err => {
@@ -56,5 +56,5 @@ export const login = async (req, res, next) => {
 
     const token = jwt.sign(userForToken, process.env.SECRET_WORD)
 
-    res.send(new ResponseCreator('Login Successfully', 200, token))
+    res.send(new ResponseCreator('Login Successfully', 200, {token, user}))
 }
