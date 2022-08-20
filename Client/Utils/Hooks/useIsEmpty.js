@@ -1,5 +1,5 @@
-function isEmpty(obj) {
+function useIsEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
-export default isEmpty;
+export default useIsEmpty;

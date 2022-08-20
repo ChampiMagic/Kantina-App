@@ -6,12 +6,15 @@ import { AntDesign } from '@expo/vector-icons';
 
 //Hooks
 import useLogOut from "../Utils/Hooks/useLogOut";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useIsEmpty from "../Utils/Hooks/useIsEmpty";
 
 
 const CustomDrawer = ({...props}) => {
 
   const dispatch = useDispatch()
+
+  const user = useSelector(state => state.userController.user)
 
     return (
       <View style={{ flex: 1 }}>
@@ -36,14 +39,19 @@ const CustomDrawer = ({...props}) => {
 
          <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
 
-          <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }}  onPress={() => useLogOut(dispatch)}>
-          <AntDesign name="logout" size={24} color="black" />
-          <Text
-          style={{
-            marginLeft: 15,
-          }}
-          >Log out</Text>
-          </TouchableOpacity>  
+          {
+            useIsEmpty(user)?
+            null
+            :
+            <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }}  onPress={() => useLogOut(dispatch)}>
+            <AntDesign name="logout" size={24} color="black" />
+            <Text
+            style={{
+              marginLeft: 15,
+            }}
+            >Log out</Text>
+            </TouchableOpacity>  
+          }
 
           <TouchableOpacity style={{ paddingVertical: 15, flexDirection:'row', alignItems: 'center' }} >
           <AntDesign name="sharealt" size={24} color="black" />
