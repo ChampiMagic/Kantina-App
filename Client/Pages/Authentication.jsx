@@ -8,7 +8,7 @@ const URI = {
     Login: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
 }
 
-const Authentication = ({navigation}) => {
+const Authentication = () => {
 
     
 
@@ -43,9 +43,9 @@ const Authentication = ({navigation}) => {
                         </View>
                         <View style={styles.FormContainer}>
                             {onToggle? 
-                            <Login navigation={navigation}/>
+                            <Login />
                             :
-                            <Register navigation={navigation}/>
+                            <Register />
                             }
                         </View>
                     </View>

@@ -13,7 +13,7 @@ import { saveUser } from "../Redux/slices/userSlice";
 //Token Store
 import * as SecureStore from 'expo-secure-store';
 
-export default function Register({navigation}) {
+export default function Register() {
 
     const dispatch = useDispatch()
 
@@ -37,7 +37,6 @@ export default function Register({navigation}) {
            
             dispatch(saveUser(metaData.data.response.user))
 
-            navigation.navigate("Home")
 
         }).catch(err => {
             console.error(err)

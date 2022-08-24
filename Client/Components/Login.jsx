@@ -12,7 +12,7 @@ import { saveUser } from "../Redux/slices/userSlice";
 //Token Store
 import * as SecureStore from 'expo-secure-store';
 
-export default function Login({navigation}) {
+export default function Login() {
 
     const dispatch = useDispatch()
 
@@ -28,8 +28,7 @@ export default function Login({navigation}) {
             await SecureStore.setItemAsync("token", metaData.data.response.token);
 
             dispatch(saveUser(metaData.data.response.user))
-
-            navigation.navigate("Home")
+            
         }).catch(err => {
             console.error(err)
         })
