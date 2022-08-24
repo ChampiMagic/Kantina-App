@@ -8,12 +8,16 @@ import { AntDesign } from '@expo/vector-icons';
 import QRCode from "react-qr-code";
 
 
-const CustomQRcode = () => {
+
+
+const CustomQRcode = ({userId}) => {
+
+
 
     return (
         <View style={styles.QRcontainer}>
             <AntDesign name="arrowdown" size={80} color="black" style={styles.arrow} />
-             <QRCode title="My QR Code" value="CJS6868JDN3mc5643fewf" size={256} level='L' />
+             <QRCode title="My QR Code" value={userId} size={256} level='L' />
         </View>
     )
 

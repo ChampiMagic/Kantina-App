@@ -1,10 +1,15 @@
 import { View, Text, StatusBar, StyleSheet, ImageBackground } from "react-native";
 import CustomQRcode from "../Components/CustomQRcode";
 
+//import hooks
+import { useSelector } from "react-redux";
+
 const URI = "https://images.unsplash.com/photo-1506143925201-0252c51780b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
 
 
 const MyQRcode = ({ navigation }) => {
+
+    const user = useSelector(state => state.userController.user)
 
 
     return (
@@ -18,8 +23,8 @@ const MyQRcode = ({ navigation }) => {
             />
            <View style={styles.QRContainer}>
                 <Text style={styles.text}>Scan Me!</Text>
-               <CustomQRcode />
-               <Text style={styles.subText}>Homero Gazze</Text>
+               <CustomQRcode userId={user._id}/>
+               <Text style={styles.subText}>{user.name}</Text>
            </View>
         </ImageBackground>
     )
