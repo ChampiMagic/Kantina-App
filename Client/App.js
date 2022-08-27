@@ -2,8 +2,11 @@
 import Main from "./Main.js";
 
 //import redux
-import { store } from "./Redux/Store.js";
+import { store, persistor } from "./Redux/Store.js";
 import { Provider } from "react-redux";
+
+//import redux persitor
+import { PersistGate } from 'redux-persist/integration/react'
 
 //axios baseURL config
 import axios from "axios";
@@ -18,7 +21,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Main />
+      <PersistGate loading={null} persistor={persistor}>
+        <Main />
+      </PersistGate>
     </Provider>
   )
 }
