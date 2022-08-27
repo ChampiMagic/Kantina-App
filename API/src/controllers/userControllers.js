@@ -35,7 +35,7 @@ export const getUserById = (req, res , next) => {
         }
 
     } else {
-        res.send(errorCreator("Unauthorized user", 401))
+        res.send(new errorCreator("Unauthorized user", 401))
     }
 
 }

@@ -9,8 +9,8 @@ import { loginValidationSchema } from "../../Utils/ValidationSchemas/Login";
 //import Components
 import { Formik } from 'formik'
 import { View, Button } from "react-native";
-import FormikTextInput from "./FormikTextInput";
-import { ErrorMessage } from "formik";
+import FormikTextInput from "../Others/FormikTextInput";
+import ErrorText from "../Others/ErrorText";
 
 //import hooks
 import { useDispatch } from "react-redux";
@@ -46,7 +46,7 @@ export default function Login() {
 
         } catch (err) {
 
-            setError(err.message)
+            setError(err.response.data.message)
         }
        
     }
@@ -69,7 +69,7 @@ export default function Login() {
                         />
 
                         <Button onPress={handleSubmit} title='Sign In' />
-                        { error && <ErrorMessage>{error}</ErrorMessage> }
+                        { error && <ErrorText>{error}</ErrorText> }
 
                     </View>
                 )

@@ -11,10 +11,10 @@ import { useDispatch } from "react-redux";
 //import components
 import { Formik } from 'formik'
 import { View, Button, StyleSheet, Text } from "react-native";
-import GenreSelector from "./GenreSelector";
-import ErrorText from "./ErrorText";
+import GenreSelector from "../Others/GenreSelector";
+import ErrorText from "../Others/ErrorText";
 import Checkbox from 'expo-checkbox';
-import FormikTextInput from "./FormikTextInput";
+import FormikTextInput from "../Others/FormikTextInput";
 
 //import action
 import { saveUser } from "../../Redux/slices/userSlice";
@@ -47,13 +47,14 @@ export default function Register() {
             const metaData = await axios.post('publicAuth', values)
             const response = metaData.data.response
 
-                await SecureStore.setItemAsync("token", response.token);
+            await SecureStore.setItemAsync("token", response.token);
                
-                dispatch(saveUser(response.user))
+            dispatch(saveUser(response.user))
 
         } catch (err) {
 
-            setError(err.message)
+            console.log(err)
+            setError(err.response.data.message)
         }
 
     }

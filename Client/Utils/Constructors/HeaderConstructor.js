@@ -1,5 +1,5 @@
 
-const HeaderConstructor = (extra) => {
+const HeaderConstructor = async (extra) => {
     
     const config = {
         headers: {

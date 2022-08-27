@@ -1,8 +1,12 @@
+//import dependencies
 import React, { useState } from "react";
+
+//import components
 import { View, StatusBar, StyleSheet, ImageBackground} from "react-native";
-import Login from "../Components/Login";
-import Register from "../Components/Register";
+import Login from "../Components/AuthPage/Login";
+import Register from "../Components/AuthPage/Register";
 import ToggleSwitch from 'toggle-switch-react-native'
+
 
 const URI = {
     Login: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",

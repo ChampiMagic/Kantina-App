@@ -9,9 +9,9 @@ import * as SecureStore from 'expo-secure-store';
 import { AntDesign } from '@expo/vector-icons';
 
 //import components
-import SimpleCustomTextInput from './SimpleCustomTextInput'
-import DatePicker from "./DatePicker";
-import GenreSelector from "./GenreSelector";
+import SimpleCustomTextInput from '../Others/SimpleCustomTextInput'
+import DatePicker from "../Others/DatePicker";
+import GenreSelector from "../Others/GenreSelector";
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -19,7 +19,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { profileValidationSchema } from '../../Utils/ValidationSchemas/Profile.js'
 
 // Hooks
-import useUser from "../../Utils/Hooks/useUser";
+import useUser from "../../Utils/Hooks/useUpdateUser";
 import { useDispatch } from "react-redux";
 
 

@@ -1,7 +1,8 @@
-import { View, StatusBar, StyleSheet} from "react-native";
-import Profile from "../Components/profile";
+//import Components
+import { View, StatusBar, StyleSheet } from "react-native";
+import Profile from "../Components/ConfigPage/profile";
 
-//Hooks
+//import Hooks
 import { useSelector } from "react-redux";
 
 
@@ -20,7 +21,7 @@ const Settings = () => {
             backgroundColor="rgba(0, 0, 0, 0.07)"
             translucent={true}
             />
-            <Profile name={user.name}/>
+            <Profile name={user.name} genre={user.genre} date={user.date} imageKey={user.imageKey} user={user}/>
         </View>
     )
 }

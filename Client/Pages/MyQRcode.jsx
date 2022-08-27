@@ -1,5 +1,5 @@
 import { View, Text, StatusBar, StyleSheet, ImageBackground } from "react-native";
-import CustomQRcode from "../Components/CustomQRcode";
+import CustomQRcode from "../Components/QRPage/CustomQRcode";
 
 //import hooks
 import { useSelector } from "react-redux";

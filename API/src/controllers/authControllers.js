@@ -64,16 +64,20 @@ export const login = async (req, res, next) => {
     //bad request    
     if(!(user && passwordCorrect)) {
         next(new errorCreator('invalid user or password', 401))
-    }
 
-    //token data
-    const userForToken = {
-        _id: user._id,
-        isStudent: newUser.isStudent
-    }
+    } else {
 
-    //creating token
-    const token = jwt.sign(userForToken, process.env.SECRET_WORD)
+        //token data
+        const userForToken = {
+            _id: user._id,
+            isStudent: user.isStudent
+        }
 
-    res.send(new ResponseCreator('Login Successfully', 200, {token, user}))
+        //creating token
+        const token = jwt.sign(userForToken, process.env.SECRET_WORD)
+
+        res.send(new ResponseCreator('Login Successfully', 200, {token, user}))
+        }
+
+   
 }

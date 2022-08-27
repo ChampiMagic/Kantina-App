@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { View, StatusBar, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
-import ShoppingCard from "../Components/ShoppingCard";
+import ShoppingCard from "../Components/ShoppingPage/ShoppingCard";
 import { useState, useEffect } from "react";
-import useProducts from "../Utils/Hooks/useProducts";
+import useGetProducts from "../Utils/Hooks/useGetProducts";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Shopping =  () => {
@@ -18,7 +18,7 @@ const Shopping =  () => {
         setGroup("")
         
         try {
-          const { data, message } = await useProducts(null, null, name, false)
+          const { data, message } = await useGetProducts(null, null, name, false)
           setProducts(data)
 
         }catch (err) {

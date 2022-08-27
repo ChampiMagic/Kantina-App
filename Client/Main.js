@@ -10,7 +10,7 @@ import useIsEmpty from "./Utils/Hooks/useIsEmpty.js";
 import { useSelector } from "react-redux";
 
 //import components
-import CustomDrawer from "./Components/CustomDrawer.jsx";
+import CustomDrawer from "./Components/Navigator/CustomDrawer.jsx";
 
 //import pages
 import Authentication from "./Pages/Authentication.jsx";

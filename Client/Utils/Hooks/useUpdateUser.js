@@ -5,7 +5,7 @@ import axios from 'axios';
 import { updateUser } from '../../Redux/slices/userSlice.js'
 
 //import constructor
-import { HeaderConstructor } from '../Constructors/HeaderConstructor.js'
+import HeaderConstructor from '../Constructors/HeaderConstructor.js';
 
 
 const useUser =  async (data, dispatch) => {

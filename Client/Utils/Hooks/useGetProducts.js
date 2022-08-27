@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 //import constructor
-import { HeaderConstructor } from '../Constructors/HeaderConstructor.js'
+import HeaderConstructor from '../Constructors/HeaderConstructor.js';
 
 const useGetProducts = async (group, id, name, filters) => {
 
