@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#c91c1c',
         fontWeight: '500',
-        marginBottom: 10
+        marginBottom: 5
     }
 })
 

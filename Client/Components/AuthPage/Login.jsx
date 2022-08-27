@@ -2,12 +2,12 @@ import React from "react";
 import { Formik } from 'formik'
 import FormikTextInput from "./FormikTextInput";
 import { View, Button } from "react-native";
-import { loginValidationSchema } from "../Utils/ValidationSchemas/Login";
+import { loginValidationSchema } from "../../Utils/ValidationSchemas/Login";
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 
 //reducer
-import { saveUser } from "../Redux/slices/userSlice";
+import { saveUser } from "../../Redux/slices/userSlice";
 
 //Token Store
 import * as SecureStore from 'expo-secure-store';

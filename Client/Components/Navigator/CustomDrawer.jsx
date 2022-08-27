@@ -5,9 +5,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 //Hooks
-import useLogOut from "../Utils/Hooks/useLogOut";
+import useLogOut from "../../Utils/Hooks/useLogOut";
 import { useDispatch, useSelector } from "react-redux";
-import useIsEmpty from "../Utils/Hooks/useIsEmpty";
+import useIsEmpty from "../../Utils/Hooks/useIsEmpty";
 
 
 const CustomDrawer = ({...props}) => {
