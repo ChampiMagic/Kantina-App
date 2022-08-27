@@ -19,6 +19,19 @@ const schema = new Schema({
         required: true,
         minlength: 8
     },
+    date: {
+        type: Date,
+        default: null
+    },
+    genre: {
+        type: String,
+        enum: ['male', 'female', 'other'],
+        required: true,
+    },
+    imageKey: {
+        type: String,
+        default: "unknownUser.png"
+    },
     isStudent: {
         type: Boolean,
         required: true

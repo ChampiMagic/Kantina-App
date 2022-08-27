@@ -1,6 +1,11 @@
+//import model
 import Product from "../models/Product.js";
+
+//import constructor
 import { errorCreator, ResponseCreator } from '../../utils/responseCreator.js'
 
+
+//  -----PRIVATE CONTROLLERS-----  //
 
 //GET
 export const getProduct =  async (req, res, next) => {
@@ -15,14 +20,18 @@ export const getProduct =  async (req, res, next) => {
     
         else searchProduct = await  Product.find({})
 
-        res.json(new ResponseCreator(null, 200, searchProduct))
+        res.json(new ResponseCreator(null, 200, {products: searchProduct}))
 
     } catch (err) {
+
+        console.log("ERROR: PRODUCTCONTROLLER(getProduct)")
         next(err)
      }
 }
 
 export const getProductById = (req, res, next) => {
+
+
     const { id } = req.query;
 
     if(!id) next(new errorCreator('Query is invalid or incorrect', 400))
@@ -34,9 +43,11 @@ export const getProductById = (req, res, next) => {
 
             !product 
                 ? next(new errorCreator('Product not Found', 404))
-                : res.json(new ResponseCreator(null, 200, product))
+                : res.json(new ResponseCreator(null, 200, {products: product}))
 
         }).catch(err => {
+
+            console.log("ERROR: PRODUCTCONTROLLER(getProductById)")
             next(err)
         })
     }
@@ -44,21 +55,31 @@ export const getProductById = (req, res, next) => {
 }
 
 export const getProductByName = async (req, res, next) => {
+
     const { name } = req.query;
 
     if(!name) next(new errorCreator('Query is invalid or incorrect', 400))
 
     else {
 
-        const allProducts = await Product.find({})
+        try {
 
-        const searchProduct = allProducts.filter((product) => product.name.toLowerCase().includes(name.toLowerCase()))
+            const allProducts = await Product.find({})
 
-        if(!searchProduct.length) next(new errorCreator('Product not Found', 404))
+            const searchProduct = allProducts.filter((product) => product.name.toLowerCase().includes(name.toLowerCase()))
 
-        else {
-            res.json(new ResponseCreator(null, 200, searchProduct))
+            if(!searchProduct.length) next(new errorCreator('Product not Found', 404))
+            else {
+
+                res.json(new ResponseCreator(null, 200, {products: searchProduct}))
+            }
+
+        } catch(err) {
+
+            console.log("ERROR: PRODUCTCONTROLLER(getProductByName)")
+            next(err)
         }
+        
     }
     
     
@@ -85,49 +106,92 @@ export const getGroups = async (req, res, next) => {
 }
 
 
+
 //POST
 export const createProduct =  (req, res, next) => {
 
-    const productData = req.body
+    if(!req.userData.isStudent) {
 
-    Product.create(productData)
-     .then(newProduct => {
-        res.status(201).json(new ResponseCreator("Product Created", 201, newProduct))
-     }).catch(err => {
-        next(err)
-     })
+        const productData = req.body
+
+        Product.create(productData)
+        .then(newProduct => {
+
+            res.status(201).json(new ResponseCreator("Product Created", 201, {products: newProduct}))
+
+        }).catch(err => {
+
+            console.log("ERROR: PRODUCTCONTROLLER(createProduct)")
+            next(err)
+        })
+    } else {
+
+        res.send(errorCreator("Unauthorized user", 401))
+    }
+
+    
 }
+
 
 //PUT
 export const updateProduct =  (req, res, next) => {
 
-    const { id, productData } = req.body;
+    if(!req.userData.isStudent) {
 
-    Product.findByIdAndUpdate(id, productData, { new: true })
-    .then(updateProduct => {
-        if(!updateProduct) {
-            const error = new errorCreator(`Product with id ${id} not found`, 404)
-            next(error)
 
-        } else {
-            res.json(new ResponseCreator("Product Updated", 200, updateProduct))
-        }
-       
-    }).catch(err => {
-        next(err)
-    })
+        const { id, productData } = req.body;
+
+        Product.findByIdAndUpdate(id, productData, { new: true })
+        .then(updateProduct => {
+
+            if(!updateProduct) {
+
+                const error = new errorCreator(`Product with id ${id} not found`, 404)
+                next(error)
+
+            } else {
+
+                res.json(new ResponseCreator("Product Updated", 200, {products: updateProduct}))
+            }
+        
+        }).catch(err => {
+
+            console.log("ERROR: PRODUCTCONTROLLER(updateProduct)")
+            next(err)
+        })
+
+    } else {
+        res.send(errorCreator("Unauthorized user", 401))
+    }
 
 }
+
 
 //DELETE
 export const deleteProduct =  (req, res, next) => {
 
-    const { id } = req.body;
+    if(!req.userData.isStudent) {
+        
 
-    Product.findByIdAndDelete(id)
-    .then(() => {
-        res.status(204).send(new ResponseCreator("Product Deleted", 204, null))
-    }).catch(err => {
-        next(err)
-    })
+        const { id } = req.body;
+
+        Product.findByIdAndDelete(id)
+        .then(() => {
+
+            res.status(204).send(new ResponseCreator("Product Deleted", 204, null))
+        }).catch(err => {
+
+            console.log("ERROR: PRODUCTCONTROLLER(deleteProduct)")
+            next(err)
+        })
+
+    } else {
+
+        res.send(errorCreator("Unauthorized user", 401))
+    }
+
 }
+
+
+//  -----PUBLIC CONTROLLERS-----  //
+

@@ -11,20 +11,16 @@ import './db.js'
 import express from 'express';
 const app = express();
 
-//Importing Product Model
-import Product from './src/models/Product.js'
-
 
 //Config of App Middlewares
 app.use(express.json())
 app.use(cors())
 
 
-
-
-
 app.use('/api', router)
 
+
+//Config of App Error Middleware
 app.use(errorHandler)
 
 
