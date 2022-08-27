@@ -1,11 +1,11 @@
 //import dependencies
-import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 
 
 //import hooks
+import React from "react";
 import useIsEmpty from "./Utils/Hooks/useIsEmpty.js";
 import { useSelector } from "react-redux";
 
@@ -25,6 +25,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
+//Initialize Navigators
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -33,7 +34,7 @@ const Stack = createStackNavigator();
 export default function Main() {
 
   const user = useSelector(state => state.userController.user)
-
+   
 
   return (
       <NavigationContainer>

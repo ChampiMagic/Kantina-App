@@ -21,7 +21,7 @@ const Authentication = () => {
     }
 
     return (
-          <ImageBackground source={{ uri: URI.Login }} resizeMode="cover" style={styles.BackgroundImage}>
+          <ImageBackground source={{ uri: URI.Login }} resizeMode="cover" style={styles.BackgroundImage} back>
                 <StatusBar
                     animated={true}
                     translucent={true}
@@ -56,18 +56,17 @@ const Authentication = () => {
 const styles = StyleSheet.create({
     BackgroundImage: {
         flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     SubContainer: {
-        width: '80%',
-        padding: 25,
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        paddingHorizontal: 25,
+        paddingTop: 50,
     },
     ButtonContainer: {
         marginBottom: 30,
-    },
-    FormContainer: {
-
     }
 })
 

@@ -99,7 +99,7 @@ export const getGroups = async (req, res, next) => {
 
     if(!groups.length) next(new errorCreator('groups not Found', 404))
     else {
-        res.json(new ResponseCreator(null, 200, groups))
+        res.json(new ResponseCreator(null, 200, {groups}))
     }
     
 

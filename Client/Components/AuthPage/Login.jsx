@@ -1,18 +1,30 @@
-import React from "react";
-import { Formik } from 'formik'
-import FormikTextInput from "./FormikTextInput";
-import { View, Button } from "react-native";
-import { loginValidationSchema } from "../../Utils/ValidationSchemas/Login";
+//import dependencies
+import React, {useState} from "react";
 import axios from 'axios';
+
+//import Validation Schema
+import { loginValidationSchema } from "../../Utils/ValidationSchemas/Login";
+
+
+//import Components
+import { Formik } from 'formik'
+import { View, Button } from "react-native";
+import FormikTextInput from "./FormikTextInput";
+import { ErrorMessage } from "formik";
+
+//import hooks
 import { useDispatch } from "react-redux";
 
-//reducer
+//import action
 import { saveUser } from "../../Redux/slices/userSlice";
 
-//Token Store
+//import Token Store
 import * as SecureStore from 'expo-secure-store';
 
+
 export default function Login() {
+
+    const [ error, setError ] = useState(null)
 
     const dispatch = useDispatch()
 
@@ -21,17 +33,22 @@ export default function Login() {
         password: ''
     }
 
-    const onSubmit = (values) => {
-       
-        axios.post('publicAuth/login', values)
-        .then(async (metaData) => {
-            await SecureStore.setItemAsync("token", metaData.data.response.token);
+    const onSubmit = async (values) => {
+        
+        try {
 
-            dispatch(saveUser(metaData.data.response.user))
-            
-        }).catch(err => {
-            console.error(err)
-        })
+            const metaData = await axios.post('publicAuth/login', values)
+            const response = metaData.data.response
+        
+            await SecureStore.setItemAsync("token", response.token);
+
+            dispatch(saveUser(response.user))
+
+        } catch (err) {
+
+            setError(err.message)
+        }
+       
     }
 
     return (
@@ -39,16 +56,21 @@ export default function Login() {
             {({ handleSubmit }) => {
                 return (
                     <View>
+                        
                         <FormikTextInput 
                         name='email'
                         placeholder='E-mail'
                         />
+
                         <FormikTextInput 
                         name='password'
                         placeholder='Password'
                         secureTextEntry
                         />
+
                         <Button onPress={handleSubmit} title='Sign In' />
+                        { error && <ErrorMessage>{error}</ErrorMessage> }
+
                     </View>
                 )
             }}

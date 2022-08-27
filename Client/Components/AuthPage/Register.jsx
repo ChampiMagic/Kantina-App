@@ -1,30 +1,34 @@
-import React, {useState} from "react";
-import { Formik } from 'formik'
-import FormikTextInput from "./FormikTextInput";
-import { View, Button, StyleSheet, Text, Image} from "react-native";
-import { registerValidationSchema } from '../../Utils/ValidationSchemas/Register'
+//import dependencies
+import React, { useState } from "react";
 import axios from 'axios';
-import Checkbox from 'expo-checkbox';
+
+//import Validation Schema
+import { registerValidationSchema } from '../../Utils/ValidationSchemas/Register'
+
+//import Hooks
 import { useDispatch } from "react-redux";
 
-
-
 //import components
+import { Formik } from 'formik'
+import { View, Button, StyleSheet, Text } from "react-native";
 import GenreSelector from "./GenreSelector";
 import ErrorText from "./ErrorText";
+import Checkbox from 'expo-checkbox';
+import FormikTextInput from "./FormikTextInput";
 
-//reducer
+//import action
 import { saveUser } from "../../Redux/slices/userSlice";
 
-//Token Store
+//import Token Store
 import * as SecureStore from 'expo-secure-store';
 
 export default function Register() {
 
     const dispatch = useDispatch()
 
+    const [error, setError] = useState(null)
     const [isChecked, setChecked] = useState(false);
-
+    
 
     const initialValues = {
         name: '',
@@ -36,19 +40,22 @@ export default function Register() {
     }
 
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         
-    
-        axios.post('publicAuth', values)
-        .then(async (metaData) => {
+        try {
 
-            await SecureStore.setItemAsync("token", metaData.data.response.token);
-           
-            dispatch(saveUser(metaData.data.response.user))
-          
-        }).catch(err => {
-            console.error(err)
-        })
+            const metaData = await axios.post('publicAuth', values)
+            const response = metaData.data.response
+
+                await SecureStore.setItemAsync("token", response.token);
+               
+                dispatch(saveUser(response.user))
+
+        } catch (err) {
+
+            setError(err.message)
+        }
+
     }
 
     return (
@@ -91,6 +98,7 @@ export default function Register() {
                         </View>
                                 
                         <Button onPress={handleSubmit} title='Sign Up'/>
+                        { error && <ErrorMessage>{error}</ErrorMessage> }
                         
                     </View>
                 )
