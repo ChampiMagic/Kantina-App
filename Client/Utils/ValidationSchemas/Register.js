@@ -21,5 +21,9 @@ export const registerValidationSchema = yup.object().shape({
     .required('Please retype your password.')
     .oneOf([yup.ref('password')], `Your passwords don't match.`),
     isStuden: yup
-    .boolean()
+    .boolean(),
+    genre: yup
+    .string()
+    .required('Please select one')
+    .oneOf(['male', 'female', 'other'])
 })
