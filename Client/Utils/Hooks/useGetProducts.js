@@ -15,8 +15,8 @@ const useGetProducts = async (group, id, name, filters) => {
    try {
 
       if(filters) {
-         const response  = await axios.get(`privateProduct/groups`, config)
-         allGroups = response.groups
+         const meteData  = await axios.get(`privateProduct/groups`, config)
+         allGroups = meteData.data.response.groups
       }
    
       if(id) {

@@ -1,29 +1,45 @@
-import { useCallback } from "react";
+//import components
 import { View, StatusBar, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity, Text } from "react-native";
-import { AntDesign } from '@expo/vector-icons'; 
 import ShoppingCard from "../Components/ShoppingPage/ShoppingCard";
-import { useState, useEffect } from "react";
+
+//import Hooks
+import { useCallback } from "react";
+import { useState } from "react";
 import useGetProducts from "../Utils/Hooks/useGetProducts";
 import { useFocusEffect } from "@react-navigation/native";
+
+//import Icons
+import { AntDesign } from '@expo/vector-icons'; 
+
 
 const Shopping =  () => {
 
     const [products, setProducts] = useState([])
-    const [group, setGroup] = useState("")
     const [filters, setFilters] = useState([])
+
+    //input states
+    const [group, setGroup] = useState("")
     const [toSearch, setToSearch] = useState("")
 
+    //handlers states
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+
     const handleSearch = async (name) => {
+
         setToSearch(name)
         setGroup("")
         
-        try {
-          const { data, message } = await useGetProducts(null, null, name, false)
-          setProducts(data)
+        setLoading(true)
 
-        }catch (err) {
-          setProducts(err.data)
-        }
+        const { data, message, allGroups, error } = await useGetProducts(null, null, name, false)
+
+        setProducts(data)
+        setError(error)
+
+        setLoading(false)
+
+  
        
         
     } 
@@ -31,16 +47,28 @@ const Shopping =  () => {
     const changeSection = async (sectionId) => {
       setGroup(sectionId)
 
-      const {data, message} = await useProducts(sectionId)
-      setProducts(data)      
+      setLoading(true)
+
+      const {data, message, allGroups, error} = await useGetProducts(sectionId)
+
+      setProducts(data) 
+      setError(error)
+
+      setLoading(false)     
     }
 
     useFocusEffect(
       useCallback(() => {
         const asyncCall = async () => {
-          const {data, message, allGroups} = await useProducts(null, null, null, true)
+
+          setLoading(true)
+
+          const {data, message, allGroups, error} = await useGetProducts(null, null, null, true)
           setProducts(data)
           setFilters(allGroups)
+          setError(error)
+
+          setLoading(false)
         }
   
         asyncCall()
@@ -48,19 +76,11 @@ const Shopping =  () => {
         return () => {
           setGroup("")
           setToSearch("")
+          setError(null)
+          setProducts([])
         }
       }, [])
     )
-
-    /*useEffect(() => {
-      const asyncCall = async () => {
-        const {data, message, allGroups} = await useProducts(null, null, null, true)
-        setProducts(data)
-        setFilters(allGroups)
-      }
-
-      asyncCall()
-    }, [])*/
 
     return (
         <View style={{ flex: 1, paddingVertical: 10, backgroundColor: '#fff' }}>
@@ -86,13 +106,20 @@ const Shopping =  () => {
                       ))}
                     </ScrollView>
             </View>
+            {!loading && !error? 
+               <FlatList 
+               data={products}
+               renderItem={({item}) => <ShoppingCard _id={item._id} image={item.image} title={item.name} price={item.price} />}
+               numColumns={2}
+               columnWrapperStyle={styles.container}
+               />
+              :
+              null
+            }
+
+            {loading && <Text>Loading...</Text>}
+            {error && <Text>{error}</Text>}
             
-            <FlatList 
-            data={products}
-            renderItem={({item}) => <ShoppingCard _id={item._id} image={item.image} title={item.name} price={item.price} />}
-            numColumns={2}
-            columnWrapperStyle={styles.container}
-            />
         </View>    
     )
 }

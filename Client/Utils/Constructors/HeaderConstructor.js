@@ -12,7 +12,6 @@ const HeaderConstructor = async (extra) => {
         }
     }
     
-    console.log(config)
     return config;
 }
 
