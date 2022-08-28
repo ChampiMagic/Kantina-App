@@ -15,28 +15,28 @@ const useGetProducts = async (group, id, name, filters) => {
    try {
 
       if(filters) {
-         const response  = await axios.get(`privateProduct/groups`, null, config)
+         const response  = await axios.get(`privateProduct/groups`, config)
          allGroups = response.groups
       }
    
       if(id) {
-         const metaData = await axios.get(`privateProduct/byId?id=${id}`, null, config)
+         const metaData = await axios.get(`privateProduct/byId?id=${id}`, config)
          response = metaData.data.response
       }
    
       else if(name) {
-         const metaData = await axios.get(`privateProduct/byName?name=${name}`, null, config)
+         const metaData = await axios.get(`privateProduct/byName?name=${name}`, config)
          response = metaData.data.response
       }
    
       else {
          if(!group) group = ""
-         const metaData = await axios.get(`privateProduct?group=${group}`, null, config)
+         const metaData = await axios.get(`privateProduct?group=${group}`, config)
          response = metaData.data.response
       }
    }catch (err) {
 
-      throw { data: [], message: null , allGroups: null, error:  err.message}
+      return { data: [], message: null , allGroups: null, error:  err.message}
    }
 
    return { data: response.products , message: response.message, allGroups: allGroups,  error: null}
