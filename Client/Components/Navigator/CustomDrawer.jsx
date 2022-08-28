@@ -28,7 +28,7 @@ const CustomDrawer = ({...props}) => {
                 <Text style={{ fontSize: 15, color: '#fff'}}>{user.email}</Text>
                 <Text style={{ fontSize: 15, color: '#fff'}}>Yapeyu</Text>
               </View>
-              <Image style={{ width: 60, height: 60, borderRadius: 30 }} source={{ uri: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" }}/>
+              <Image style={{ width: 60, height: 60, borderRadius: 30 }} source={{ uri: `http://192.168.0.103:3005/api/privateAWS/${user.imageKey}` }}/>
             </View>
 
             <View style={{ backgroundColor: '#fff', paddingTop: 20 }}>

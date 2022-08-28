@@ -46,7 +46,7 @@ export const updateUser = (req, res, next) => {
 
     const updateUser = req.body.updateUser
 
-    User.findByIdAndUpdate(req.userData._id, updateUser)
+    User.findByIdAndUpdate(req.userData._id, updateUser, {new: true})
     .then(updatedUser => {
 
         res.send(new ResponseCreator('User Updated', 200, {user: updatedUser}))

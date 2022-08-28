@@ -6,5 +6,7 @@ export const profileValidationSchema = yup.object().shape({
     .string()
     .min(5, 'Too short!')
     .max(1000, 'Too long!')
-    .required('name is required')
+    .required('name is required'),
+    date: yup
+    .date()
 })

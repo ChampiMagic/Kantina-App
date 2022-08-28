@@ -8,7 +8,7 @@ import { updateUser } from '../../Redux/slices/userSlice.js'
 import HeaderConstructor from '../Constructors/HeaderConstructor.js';
 
 
-const useUser =  async (data, dispatch) => {
+const useUpdateUser =  async (data, dispatch) => {
 
 
     const config = await HeaderConstructor()
@@ -24,10 +24,10 @@ const useUser =  async (data, dispatch) => {
 
     } catch(err){
         
-        throw { data: {}, message: null,  error: err.message }
+        return { data: {},  message: null,  error: err.message }
     }
 
 
 }
 
-export default useUser;
+export default useUpdateUser;

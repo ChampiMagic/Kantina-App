@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Platform, TouchableOpacity} from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DatePicker = () => {
+const DatePicker = ({defaultDate, setFieldValue}) => {
 
 
     const [date, setDate] = useState(new Date());
@@ -19,8 +19,17 @@ const DatePicker = () => {
         const currentDate = selectedDate;
         setShow(false);
         setDate(currentDate);
+        setFieldValue('date', currentDate);
       };
-    
+
+  useEffect(() => {
+
+    if(defaultDate) {
+
+      setDate(defaultDate)
+    }
+
+  }, [defaultDate])
 
     return (
         <View>

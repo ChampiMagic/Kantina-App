@@ -13,7 +13,7 @@ const upload = multer({ dest: 'upload/' })
 import { protect } from '../../middleware/protect.js'
 
 //GET
-router.get('/:key', protect, getAWSFile)
+router.get('/:key', getAWSFile)
 
 //PUT
 router.put('/', protect, upload.single('image'), uploadImage)

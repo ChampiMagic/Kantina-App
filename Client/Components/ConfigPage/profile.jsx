@@ -13,15 +13,16 @@ import SimpleCustomTextInput from '../Others/SimpleCustomTextInput'
 import DatePicker from "../Others/DatePicker";
 import GenreSelector from "../Others/GenreSelector";
 import * as ImagePicker from 'expo-image-picker';
+import ErrorText from '../Others/ErrorText'
 
 
 // validation schema
 import { profileValidationSchema } from '../../Utils/ValidationSchemas/Profile.js'
 
 // Hooks
-import useUser from "../../Utils/Hooks/useUpdateUser";
+import useUpdateUser from "../../Utils/Hooks/useUpdateUser.js";
 import { useDispatch } from "react-redux";
-
+import useUploadImage from '../../Utils/Hooks/useUploadImage.js'
 
 
 
@@ -30,9 +31,9 @@ const Profile = ({name, genre, date, imageKey, user}) => {
     const dispatch = useDispatch()
 
     const [ input, setInput ] = useState({})
-    const [ error, setError ] = useState({})
+    const [ error, setError ] = useState(null)
     
-    const handleChange = (value, field) => {
+    const handleChange = (field, value) => {
         
         setInput({
             ...input,
@@ -45,13 +46,13 @@ const Profile = ({name, genre, date, imageKey, user}) => {
         profileValidationSchema.validate(input)
         .then( () => {
 
-            useUser({
+            useUpdateUser({
                 ...user,
                 ...input
             }, dispatch).then( () => {
 
-                console.log("GOOD")
                 
+                console.log("GOOD")
 
             }).catch(err => {
                 console.log(err)
@@ -60,7 +61,8 @@ const Profile = ({name, genre, date, imageKey, user}) => {
        
 
         }).catch(err => {
-            console.log(err)
+            
+            console.log("validation", err)
         })
         
     }
@@ -92,30 +94,16 @@ const Profile = ({name, genre, date, imageKey, user}) => {
             type: mime.getType(result.uri),
             name: result.filename || result.uri.substring(result.uri.lastIndexOf('/') + 1)
             }
-
-            const body = new FormData()
-            body.append('image', imgData)
-
-            try {
-
-
-                const metaData = await axios.put('/privateUser/upload/image', body, {
-                    headers: {
-                        'Accept': '*/*',
-                        'Content-Type': 'multipart/form-data',
-                        'authorization': `Bearer ${await SecureStore.getItemAsync('token')}`
-                       }
-                })
-
-                setInput({
-                    ...input,
-                    imageKey: metaData.data.response.imageKey
-                })
         
-            }catch (err) {
-                console.error(err)
-            }
-          
+
+            const {data, error ,message} = await useUploadImage(imgData)
+            
+            console.log(data)
+            setError(error)
+            setInput({
+                ...input,
+                imageKey: data
+            })
           
         }
 
@@ -126,28 +114,29 @@ const Profile = ({name, genre, date, imageKey, user}) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.imgContainer} onPress={pickImage}>
-                <Image style={{ width: 180, height: 180, borderRadius: 100 }} source={{ uri: `http://192.168.0.103:3005/api/privateUser/profileImg/${ input.imageKey? input.imageKey : imageKey}` }}/>
+                <Image style={{ width: 180, height: 180, borderRadius: 100 }} source={{ uri: `http://192.168.0.103:3005/api/privateAWS/${ input.imageKey? input.imageKey : imageKey}` }}/>
             </TouchableOpacity>
             <View style={styles.form}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.text}>Nombre</Text>
-                    <SimpleCustomTextInput name='nombre' placeholder="Nombre" value={input?.name} style={{ width: '50%' }} onChangeText={(text) => handleChange(text, "name")} />
+                    <SimpleCustomTextInput name='nombre' placeholder="Nombre" value={input?.name} style={{ width: '50%' }} onChangeText={(text) => handleChange("name", text)} />
                 </View>
                 <View style={styles.inputContainer}>
                     <View style={{ width: '50%' }}>
                         <Text style={styles.text}>Fecha de Nacimiento</Text>
                     </View>
 
-                    <DatePicker />
+                    <DatePicker setFieldValue={handleChange} />
                   
                 </View>
 
-                <GenreSelector defaultGenre={genre}/>
+                <GenreSelector defaultGenre={genre} setFieldValue={handleChange}/>
 
                 <TouchableOpacity onPress={handleSubmit}>
                      <AntDesign name="checkcircle" size={60} color='#90EE90' style={{ alignSelf: 'center', marginTop: 50 }}/>
                 </TouchableOpacity>
                 
+                {error && <ErrorText>{error}</ErrorText>}
             </View>
 
         </View>
