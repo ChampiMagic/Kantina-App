@@ -36,7 +36,8 @@ const useGetProducts = async (group, id, name, filters) => {
       }
    }catch (err) {
 
-      return { data: [], message: null , allGroups: null, error:  err.message}
+
+      return { data: [], message: null , allGroups: null, error:  err.response.data.message}
    }
 
    return { data: response.products , message: response.message, allGroups: allGroups,  error: null}

@@ -1,6 +1,7 @@
 //import components
-import { View, StatusBar, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity, Text } from "react-native";
+import { View, StatusBar, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity, Text, ActivityIndicator } from "react-native";
 import ShoppingCard from "../Components/ShoppingPage/ShoppingCard";
+import ErrorText from '../Components/Others/ErrorText'
 
 //import Hooks
 import { useCallback } from "react";
@@ -52,6 +53,7 @@ const Shopping =  () => {
       const {data, message, allGroups, error} = await useGetProducts(sectionId)
 
       setProducts(data) 
+
       setError(error)
 
       setLoading(false)     
@@ -117,8 +119,8 @@ const Shopping =  () => {
               null
             }
 
-            {loading && <Text>Loading...</Text>}
-            {error && <Text>{error}</Text>}
+            {loading && <ActivityIndicator style={styles.loading} size={150} color="#00ff00" />}
+            {error && <ErrorText style={styles.error}>{error}</ErrorText>}
             
         </View>    
     )
@@ -161,5 +163,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginHorizontal: 10, 
         backgroundColor: onPress? '#90EE90' :  '#fff',
-    })
+    }),
+    loading: {
+      alignSelf: 'center',
+      marginTop: 150
+    },
+    error: {
+      alignSelf: 'center',
+      fontSize: 20,
+      fontWeight: '400',
+      marginTop: 20
+  }
 })
