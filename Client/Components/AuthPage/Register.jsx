@@ -99,7 +99,7 @@ export default function Register() {
                         </View>
                                 
                         <Button onPress={handleSubmit} title='Sign Up'/>
-                        { error && <ErrorMessage>{error}</ErrorMessage> }
+                        { error && <ErrorText style={styles.error}>{error}</ErrorText> }
                         
                     </View>
                 )
@@ -123,5 +123,12 @@ const styles = StyleSheet.create({
             borderWidth: error? 0: 0,
             padding: 10
 
-        })
+        }),
+
+    error: {
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: '400',
+        marginTop: 20
+    }
 })

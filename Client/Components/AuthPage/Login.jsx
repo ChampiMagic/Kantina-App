@@ -8,7 +8,7 @@ import { loginValidationSchema } from "../../Utils/ValidationSchemas/Login";
 
 //import Components
 import { Formik } from 'formik'
-import { View, Button } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import FormikTextInput from "../Others/FormikTextInput";
 import ErrorText from "../Others/ErrorText";
 
@@ -69,7 +69,7 @@ export default function Login() {
                         />
 
                         <Button onPress={handleSubmit} title='Sign In' />
-                        { error && <ErrorText>{error}</ErrorText> }
+                        { error && <ErrorText style={styles.error}>{error}</ErrorText> }
 
                     </View>
                 )
@@ -77,3 +77,12 @@ export default function Login() {
         </Formik>
     )
 }
+
+const styles = StyleSheet.create({
+    error: {
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: '400',
+        marginTop: 20
+    }
+})
