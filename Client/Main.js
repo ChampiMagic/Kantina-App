@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 //import components
 import CustomDrawer from "./Components/Navigator/CustomDrawer.jsx";
+import HeaderCartButton from './Components/Navigator/HeaderCartButton.jsx';
 
 //import pages
 import Authentication from "./Pages/Authentication.jsx";
@@ -22,6 +23,7 @@ import Chronogram from "./Pages/Chronogram"
 
 //import icons
 import { AntDesign } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 
 
 
@@ -93,18 +95,20 @@ export default function Main() {
                 options={{
                 drawerIcon: ({color}) => (
                     <AntDesign name="setting" size={24} color={color} />
-                )
-                }}
+                )}}
                 />
 
                 <Drawer.Screen 
                 name="Shopping" 
                 component={Shopping} 
-                options={{
+                options = {({navigation}) => ({
                 drawerIcon: ({color}) => (
-                    <AntDesign name="shoppingcart" size={24} color={color} />
+                  <Entypo name="shop" size={24} color={color} />
+                ),
+                headerRight: ({color}) => (
+                  <HeaderCartButton navigation={navigation} color={color}/>
                 )
-                }}
+                })}
                 />
 
                 <Drawer.Screen 

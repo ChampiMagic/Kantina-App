@@ -23,8 +23,10 @@ const useUpdateUser =  async (data, dispatch) => {
         return { data: response.user , message: response.message,  error: null}
 
     } catch(err){
+
+        if(err.message = 'Network Error')  return { data: {},  message: null,  error: err.message }
         
-        return { data: {},  message: null,  error: err.message }
+        return { data: {},  message: null,  error: err.response.data.message }
     }
 
 
