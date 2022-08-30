@@ -16,8 +16,14 @@ const errorHandler = (err, req, res, next) => {
     }
   
     if (err.name === 'ValidationError') {
-      const message = Object.values(err.errors).map(val => val.message)
-      error = new errorCreator(message, 409)
+      let {type, path, value, message} = Object.values(err.errors).map(val => {return {type: val.kind, path: val.path, value: val.value, message: val.message}})[0]
+      
+      if(type = 'unique') {
+        error = new errorCreator(`This ${path} is already registered`, 409)
+      } else {
+        error = new errorCreator(message, 409)
+      }
+      
     }
 
     res.status(error.statusCode || 500).json({message: error.message || 'Server Error'})
