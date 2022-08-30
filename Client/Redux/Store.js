@@ -10,16 +10,19 @@ import { persistReducer, persistStore } from 'redux-persist';
 
 //Reducers
 import userReducer from "./slices/userSlice.js"
+import productReducer from "./slices/productsSlice.js"
 
 //combined reducers
 const rootReducer = combineReducers({ 
     userController: userReducer,
+    productController: productReducer
   })
 
 //config persist reducers
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
+    whitelist: ['userController']
   }
 
 //create persist reducer
