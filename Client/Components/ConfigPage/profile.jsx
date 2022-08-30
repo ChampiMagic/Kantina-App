@@ -126,7 +126,7 @@ const Profile = ({name, genre, date, imageKey, user}) => {
                         <Text style={styles.text}>Fecha de Nacimiento</Text>
                     </View>
 
-                    <DatePicker setFieldValue={handleChange} />
+                    <DatePicker defaultDate={date} setFieldValue={handleChange} />
                   
                 </View>
 

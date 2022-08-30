@@ -17,6 +17,7 @@ const DatePicker = ({defaultDate, setFieldValue}) => {
 
       const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
+        console.log(currentDate)
         setShow(false);
         setDate(currentDate);
         setFieldValue('date', currentDate);
@@ -26,7 +27,8 @@ const DatePicker = ({defaultDate, setFieldValue}) => {
 
     if(defaultDate) {
 
-      setDate(defaultDate)
+      setDate(new Date(defaultDate))
+      
     }
 
   }, [defaultDate])
