@@ -44,25 +44,16 @@ const Profile = ({name, genre, date, imageKey, user}) => {
     const handleSubmit = () => {
 
         profileValidationSchema.validate(input)
-        .then( () => {
+        .then( async () => {
 
-            useUpdateUser({
-                ...user,
-                ...input
-            }, dispatch).then( () => {
+           const { error } = await useUpdateUser({...user, ...input}, dispatch)
 
-                
-                console.log("GOOD")
-
-            }).catch(err => {
-                console.log(err)
-            })
-
-       
+            setError(error)
 
         }).catch(err => {
             
-            console.log("validation", err)
+            setError(err.message)
+           
         })
         
     }
@@ -132,11 +123,13 @@ const Profile = ({name, genre, date, imageKey, user}) => {
 
                 <GenreSelector defaultGenre={genre} setFieldValue={handleChange}/>
 
+                {error && <ErrorText style={styles.error}>{error}</ErrorText>}
+
                 <TouchableOpacity onPress={handleSubmit}>
-                     <AntDesign name="checkcircle" size={60} color='#90EE90' style={{ alignSelf: 'center', marginTop: 50 }}/>
+                     <AntDesign name="checkcircle" size={60} color='#90EE90' style={{ alignSelf: 'center', marginTop: 30 }}/>
                 </TouchableOpacity>
                 
-                {error && <ErrorText>{error}</ErrorText>}
+
             </View>
 
         </View>
@@ -175,5 +168,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: '400',
+    },
+    error: {
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: '400',
+        marginTop: 7
     }
 })
