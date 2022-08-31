@@ -20,6 +20,7 @@ import Settings from "./Pages/Settings"
 import Shopping from "./Pages/Shopping"
 import MyQRcode from "./Pages/MyQRcode"
 import Chronogram from "./Pages/Chronogram"
+import MyCart from './Pages/MyCart.jsx';
 
 //import icons
 import { AntDesign } from '@expo/vector-icons'; 
@@ -109,6 +110,16 @@ export default function Main() {
                   <HeaderCartButton navigation={navigation} color={color}/>
                 )
                 })}
+                />
+
+                <Drawer.Screen 
+                name="MyCart" 
+                component={MyCart} 
+                options={{
+                drawerIcon: ({color}) => (
+                    <AntDesign name="shoppingcart" size={24} color={color} />
+                )
+                }}
                 />
 
                 <Drawer.Screen 

@@ -9,30 +9,30 @@ export const productController = createSlice({
     reducers: {
         addProduct: (state, action) => {
 
-            const id = action.payload
+            const {_id} = action.payload
 
-            if(state.products.hasOwn(id)) {
-                state.products.id = state.products.id + 1
+            if(state.products.hasOwnProperty(_id)) {
+                state.products[_id].count = state.products[_id].count + 1
             } else {
-                state.products.id = 1 
+                state.products[_id] =  {...action.payload, count: 1}
             }
            
         },
         deleteProduct: (state, action) => {
            
-            const id = action.payload
+            const {_id} = action.payload
            
 
-            if(state.products.id === 0) {
+            if(state.products[_id].count === 1) {
                 let newObj = {}
 
                 for (const [key, value] of Object.entries(state.products)) {
-                    if(key !== id) newObj[key] = value
+                    if(key !== _id) newObj[key] = value
                   }
                 
                 state.products = newObj
             } else {
-                state.products.id = state.products.id - 1
+                state.products[_id].count = state.products[_id].count - 1
             }
 
         }

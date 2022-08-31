@@ -1,17 +1,26 @@
+//import components
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 //import icons
 import { AntDesign } from '@expo/vector-icons';
 
+//import actions
+import { addProduct } from '../../Redux/slices/productsSlice.js'
+
+//import hooks
+import { useDispatch } from "react-redux";
+
 
 const ShoppingCard = ({_id, image, title, price}) => {
+
+    const dispatch = useDispatch()
 
     return (
         <View style={styles.cardContainer} key={_id}>
             <View style={styles.imgContainer}>
                 <Image source={{ uri: image }} resizeMode='cover' style={styles.img}/>
-                <TouchableOpacity style={styles.icon}>
+                <TouchableOpacity style={styles.icon} onPress={() => dispatch(addProduct({_id, image, title, price}))}>
                      <AntDesign  name="pluscircleo" size={30} color="black" />
                 </TouchableOpacity>
                
