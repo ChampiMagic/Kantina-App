@@ -24,6 +24,9 @@ import useUpdateUser from "../../Utils/Hooks/useUpdateUser.js";
 import { useDispatch } from "react-redux";
 import useUploadImage from '../../Utils/Hooks/useUploadImage.js'
 
+//env variable
+import { BACKEND_URL } from "@env"
+
 
 
 const Profile = ({name, genre, date, imageKey, user}) => {
@@ -105,7 +108,7 @@ const Profile = ({name, genre, date, imageKey, user}) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.imgContainer} onPress={pickImage}>
-                <Image style={{ width: 180, height: 180, borderRadius: 100 }} source={{ uri: `http://192.168.0.103:3005/api/privateAWS/${ input.imageKey? input.imageKey : imageKey}` }}/>
+                <Image style={{ width: 180, height: 180, borderRadius: 100 }} source={{ uri: (BACKEND_URL || `http://192.168.0.103:3005/api/`)+`privateAWS/${ input.imageKey? input.imageKey : imageKey}` }}/>
             </TouchableOpacity>
             <View style={styles.form}>
                 <View style={styles.inputContainer}>

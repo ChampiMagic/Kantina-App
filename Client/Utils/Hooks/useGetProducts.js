@@ -11,7 +11,7 @@ const useGetProducts = async (group, id, name, filters) => {
 
    const config = await HeaderConstructor()
 
-   
+   console.log(config)
    try {
 
       if(filters) {

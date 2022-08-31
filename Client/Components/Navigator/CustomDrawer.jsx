@@ -11,6 +11,9 @@ import useLogOut from "../../Utils/Hooks/useLogOut";
 import { useDispatch, useSelector } from "react-redux";
 import useIsEmpty from "../../Utils/Hooks/useIsEmpty";
 
+//env variable
+import { BACKEND_URL } from "@env"
+
 
 const CustomDrawer = ({...props}) => {
 
@@ -30,7 +33,7 @@ const CustomDrawer = ({...props}) => {
                 <Text style={{ fontSize: 15, color: '#fff'}}>{user.email}</Text>
                 <Text style={{ fontSize: 15, color: '#fff'}}>Yapeyu</Text>
               </View>
-              <Image style={{ width: 60, height: 60, borderRadius: 30 }} source={{ uri: `http://192.168.0.103:3005/api/privateAWS/${user.imageKey}` }}/>
+              <Image style={{ width: 60, height: 60, borderRadius: 30 }} source={{ uri: (BACKEND_URL || `http://192.168.0.103:3005/api/`)+`privateAWS/${user.imageKey}` }}/>
             </View>
 
             <View style={{ backgroundColor: '#fff', paddingTop: 20 }}>

@@ -29,7 +29,6 @@ const MyCart = () => {
 
     }, [products])
 
-    console.log(productsArr[0].price)
 
     return (
         <View style={styles.container}>

@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "Client",
+    "name": "Kantina-Client-App",
     "slug": "Client",
     "version": "1.0.0",
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -29,6 +30,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "ReactNative-Canteen-App Kantina",
+    "githubUrl": "https://github.com/ChampiMagic/ReactNative-Canteen-App"
   }
 }

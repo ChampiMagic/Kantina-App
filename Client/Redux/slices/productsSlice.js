@@ -4,10 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const productController = createSlice({
     name: 'productController',
     initialState: {
-        products: {}
+        products: {},
+        count: 0
     },
     reducers: {
         addProduct: (state, action) => {
+
+            state.count += 1
 
             const {_id} = action.payload
 
@@ -20,6 +23,8 @@ export const productController = createSlice({
         },
         deleteProduct: (state, action) => {
            
+            state.count -= 1
+
             const {_id} = action.payload
            
 
@@ -39,6 +44,6 @@ export const productController = createSlice({
     },
 })
 
-export const { addProduct, deleteProduct } = productController.actions
+export const { addProduct, deleteProduct, productsCount } = productController.actions
 
 export default productController.reducer
