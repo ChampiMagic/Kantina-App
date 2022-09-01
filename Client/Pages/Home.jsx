@@ -1,6 +1,11 @@
+//import components
 import { View, Text, StatusBar, StyleSheet, ImageBackground, Image } from "react-native";
+
+//import icons
 import { AntDesign } from '@expo/vector-icons'; 
 
+//import hooks
+import { useSelector } from "react-redux";
 
 const URI = {
     Login: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
@@ -8,7 +13,7 @@ const URI = {
 
 const Home = ({ navigation }) => {
 
-    
+    const user = useSelector(state => state.userController.user)
 
     return (
     
@@ -35,8 +40,8 @@ const Home = ({ navigation }) => {
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <AntDesign name="qrcode" size={65} color="black" onPress={() => navigation.navigate("MyQRcode")}/>
-                    <Text style={styles.text}>CODIGO QR</Text>
+                    <AntDesign name="qrcode" size={65} color="black" onPress={() => navigation.navigate(user.isStudent? "MyQRcode" : "ScanQR")}/>
+                    <Text style={styles.text}>{user.isStudent? "CODIGO QR" : "SCANNER"}</Text>
                 </View>
 
                 <View style={styles.iconContainer}>

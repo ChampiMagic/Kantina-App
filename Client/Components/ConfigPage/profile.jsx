@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Platform, TouchableOpacity} from "react-native";
 import mime from "mime";
-import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
 
 
 //import icons 
@@ -76,7 +74,7 @@ const Profile = ({name, genre, date, imageKey, user}) => {
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [5, 4],
           quality: 1,
         });
         

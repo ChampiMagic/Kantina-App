@@ -21,6 +21,7 @@ import Shopping from "./Pages/Shopping"
 import MyQRcode from "./Pages/MyQRcode"
 import Chronogram from "./Pages/Chronogram"
 import MyCart from './Pages/MyCart.jsx';
+import ScanQR from './Pages/ScanQR.jsx';
 
 //import icons
 import { AntDesign } from '@expo/vector-icons'; 
@@ -122,15 +123,30 @@ export default function Main() {
                 }}
                 />
 
-                <Drawer.Screen 
-                name="MyQRcode" 
-                component={MyQRcode} 
-                options={{
-                drawerIcon: ({color}) => (
-                    <AntDesign name="qrcode" size={24} color={color} />
-                )
-                }}
-                />
+                {user.isStudent?
+
+                  <Drawer.Screen 
+                  name="MyQRcode" 
+                  component={MyQRcode} 
+                  options={{
+                  drawerIcon: ({color}) => (
+                      <AntDesign name="qrcode" size={24} color={color} />
+                  )
+                  }}
+                  />
+                :
+                  <Drawer.Screen 
+                  name="ScanQR" 
+                  component={ScanQR} 
+                  options={{
+                  drawerIcon: ({color}) => (
+                      <AntDesign name="qrcode" size={24} color={color} />
+                  )
+                  }}
+                  />
+
+                }
+               
 
                 <Drawer.Screen 
                 name="Chronogram" 
