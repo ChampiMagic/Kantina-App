@@ -22,7 +22,7 @@ export const getUserById = (req, res , next) => {
             next(error)
     
         } else {
-            User.find({email: userEmail})
+            User.find({email: userEmail}).populate('purchases')
             .then(user => {
     
                res.send(new ResponseCreator('User found', 200, {user}))
