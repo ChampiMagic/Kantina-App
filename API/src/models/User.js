@@ -37,10 +37,10 @@ const schema = new Schema({
         required: true
     },
     purchases: [
-        {
-            type: mongoose.Schema.Types.ObjectId ,
-            ref: 'Purchase'
-        }
+            {
+                type: mongoose.Schema.Types.ObjectId ,
+                ref: 'Purchase'
+            }
     ]
 },{
     versionKey: false 
