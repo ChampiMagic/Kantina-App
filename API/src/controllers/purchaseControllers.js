@@ -36,19 +36,19 @@ export const addPurchase = async (req, res, next) => {
 // DELETE
 export const deletePurchase = async(req, res, next) => {
 
-    const { purchaseId } = req.body
-
+    const { purchaseId } = req.query
+    
     try {
-
+        
         await Purchase.findByIdAndDelete(purchaseId)
         
     
         await User.findByIdAndUpdate(req.userData._id, { $pullAll: {purchases: [purchaseId]}})
-
+        
         res.send(new ResponseCreator("Purchase deleted", 200, null))
 
     } catch(err) {
-
+        
         console.log("ERROR: PURCHASECONTROLLER(deletePurchase)")
         next(err)
     }

@@ -14,7 +14,7 @@ import { BACKEND_URL } from "@env"
 
 
 axios.defaults.baseURL = BACKEND_URL || "http://192.168.0.103:3005/api/";
-
+console.log(axios.defaults.baseURL)
 
 export default function App() {
 
