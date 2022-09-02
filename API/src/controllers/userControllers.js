@@ -12,17 +12,24 @@ import { errorCreator, ResponseCreator } from "../../utils/responseCreator.js";
 export const getUserById = (req, res , next) => {
 
     if(!req.userData.isStudent) {
+       
 
+        const { userId } = req.query;
 
-        const { userEmail } = req.query;
+      
 
-        if(!userEmail) {
+        if(!userId) {
     
-            const error = new errorCreator('email is necessary', 400)
+            const error = new errorCreator('userId is necessary', 400)
             next(error)
     
         } else {
-            User.find({email: userEmail}).populate('purchases')
+            User.findById(userId).populate({
+                path: "purchases",
+                model: "Purchase",
+                populate: { path: "products.product", model: "Product", strictPopulate: false},
+                
+            })
             .then(user => {
     
                res.send(new ResponseCreator('User found', 200, {user}))
