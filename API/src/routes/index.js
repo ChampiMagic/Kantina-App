@@ -7,7 +7,9 @@ import privateProduct from './private/privateProduct.js'
 import privateUser from './private/privateUser.js'
 import privateAWS from './private/privateAWS.js'
 import privatePurchase from './private/privatePurchase.js'
+import privateStripe from './private/privateStripe.js'
 import publicAuth from './public/publicAuth.js'
+
 
 
 //private
@@ -15,6 +17,7 @@ router.use('/privateProduct', privateProduct)
 router.use('/privateUser', privateUser)
 router.use('/privateAWS', privateAWS)
 router.use('/privatePurchase', privatePurchase)
+router.use('/privateStripe', privateStripe)
 
 
 //public

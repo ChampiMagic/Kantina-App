@@ -17,9 +17,9 @@ const DatePicker = ({defaultDate, setFieldValue}) => {
 
       const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
-        console.log(currentDate)
+        
         setShow(false);
-        setDate(currentDate);
+        setDate(new Date(currentDate));
         setFieldValue('date', currentDate);
       };
 
@@ -32,6 +32,7 @@ const DatePicker = ({defaultDate, setFieldValue}) => {
     }
 
   }, [defaultDate])
+
 
     return (
         <View>

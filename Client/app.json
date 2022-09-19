@@ -32,6 +32,17 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "ReactNative-Canteen-App Kantina",
-    "githubUrl": "https://github.com/ChampiMagic/ReactNative-Canteen-App"
+    "githubUrl": "https://github.com/ChampiMagic/ReactNative-Canteen-App",
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": null,
+          "enableGooglePay": true
+        }
+      ]
+    ],
   }
 }
+
+

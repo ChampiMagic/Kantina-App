@@ -90,7 +90,6 @@ const Profile = ({name, genre, date, imageKey, user}) => {
 
             const {data, error ,message} = await useUploadImage(imgData)
             
-            console.log(data)
             setError(error)
             setInput({
                 ...input,

@@ -9,7 +9,7 @@ import { errorCreator } from '../../utils/responseCreator.js';
 export const protect = (req, res, next) => {
 
     const { authorization } = req.headers
-
+   
     let token = ''
 
     if(authorization && authorization.toLowerCase().startsWith('bearer')) {

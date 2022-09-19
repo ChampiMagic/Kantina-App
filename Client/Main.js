@@ -22,6 +22,7 @@ import MyQRcode from "./Pages/MyQRcode"
 import Chronogram from "./Pages/Chronogram"
 import MyCart from './Pages/MyCart.jsx';
 import ScanQR from './Pages/ScanQR.jsx';
+import PaymentGateway from './Pages/PaymentGateway.jsx';
 
 //import icons
 import { AntDesign } from '@expo/vector-icons'; 
@@ -156,6 +157,15 @@ export default function Main() {
                     <AntDesign name="calendar" size={24} color={color} />
                 )
                 }}
+                />
+
+                <Drawer.Screen 
+                name="PaymentGateway" 
+                component={PaymentGateway} 
+                options={{
+                 drawerItemStyle: {display: 'none'}
+                }}
+          
                 />
           </Drawer.Navigator>
         }

@@ -13,7 +13,7 @@ export const addPurchase = async (req, res, next) => {
 
     
     const {date, products} = req.body
-    
+   
     try {
       
         const purchase = await Purchase.create({
@@ -26,7 +26,7 @@ export const addPurchase = async (req, res, next) => {
         res.send(new ResponseCreator("Successful Purchase", 201, null))
 
     } catch(err) {
-
+        
         console.log("ERROR: PURCHASECONTROLLER(addPurchase)")
         next(err)
     }

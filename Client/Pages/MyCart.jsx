@@ -4,6 +4,7 @@ import React, {useState, useEffect} from "react";
 //import components
 import { View, Text, StatusBar, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import CartProductCard from "../Components/MyCartPage/cartProductCard";
+import DatePicker from '../Components/Others/DatePicker.jsx'
 
 //import hooks
 import { useSelector } from "react-redux";
@@ -11,11 +12,17 @@ import { useSelector } from "react-redux";
 //import icons
 import { AntDesign } from '@expo/vector-icons';
 
-const MyCart = () => {
-
+const MyCart = ({navigation}) => {
+    
     const [productsArr, setProductsArr] = useState([])
+    const [date, setDate] = useState(new Date())
 
     const products = useSelector(state => state.productController.products)
+
+    const onChangeDate = (value, selectedDate) => {
+        
+        setDate(selectedDate)
+    }
 
     useEffect(() => {
         const objArr = []
@@ -48,7 +55,14 @@ const MyCart = () => {
                ListFooterComponent={() => (
                     <View style={styles.totalContainer}>
                         <Text style={styles.totalPrice}>TOTAL: ${productsArr.reduce((prev, curr) => prev + (curr.price * curr.count) , 0)}</Text>
-                        <TouchableOpacity style={styles.icon} onPress={() => console.log("Buy!!!")}>
+                        <DatePicker defaultDate={date} setFieldValue={onChangeDate}/>
+                        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('PaymentGateway', {
+                            purchaseData: {
+                                products: productsArr.map(v => {return {product: v._id, count: v.count} }),
+                                date: date,
+                                amount: (productsArr.reduce((prev, curr) => prev + (curr.price * curr.count) , 0) * 1000)
+                            }
+                            })}>
                                 <AntDesign name="checkcircle" size={60} color="black" />
                         </TouchableOpacity>
                     </View>

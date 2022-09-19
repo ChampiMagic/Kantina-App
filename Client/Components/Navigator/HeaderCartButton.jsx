@@ -14,8 +14,6 @@ const HeaderCartButton = ({navigation, color}) => {
 
     const count = useSelector(state => state.productController.count)   
 
-    console.log(count)
-
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("MyCart")}>

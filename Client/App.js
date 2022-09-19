@@ -10,20 +10,29 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 //axios baseURL config
 import axios from "axios";
-import { BACKEND_URL } from "@env"
+import { BACKEND_URL, PUBLISHABLE_KEY } from "@env"
+
+//import Stripe
+import { StripeProvider } from "@stripe/stripe-react-native";
+
+//Other Configurations
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 
 
 axios.defaults.baseURL = BACKEND_URL || "http://192.168.0.103:3005/api/";
-console.log(axios.defaults.baseURL)
+
 
 export default function App() {
 
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Main />
-      </PersistGate>
+      <StripeProvider publishableKey={PUBLISHABLE_KEY}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Main />
+        </PersistGate>
+      </StripeProvider>
     </Provider>
   )
 }
