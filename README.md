@@ -232,3 +232,11 @@ Also you will need to add the following environment variables to your .env file 
 | `amount`    | `integer` |  `true`   | Amount payable in the lowest value of the currency. |
 | `currency`    | `integer` |  `true`   | actual currency. |
 
+
+## Screenshots
+
+![App Home](https://i.ibb.co/QcJVnxS/Whats-App-Image-2022-08-05-at-12-16-40-PM.jpg)
+
+![App Navigation](https://i.ibb.co/p3qFNdJ/Whats-App-Image-2022-08-05-at-12-16-39-PM.jpg)
+
+![App Profile](https://i.ibb.co/6NTBJF4/Whats-App-Image-2022-08-05-at-12-16-39-PM-1.jpg)
